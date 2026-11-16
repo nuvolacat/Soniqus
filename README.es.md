@@ -37,8 +37,9 @@ Baja el último `.dmg` desde **[Releases](https://github.com/nuvolacat/Soniqus/r
 | | |
 |---|---|
 | **Tres modos de ventana** | Reproductor compacto de doble pantalla, *Navigation console* completa y una barra mini. Ventanas sin marco y con forma, que se arrastran por la carcasa. |
-| **Ecualizador de 20 bandas** | De −12 a +12 dB por banda, presets y ruedas de ampli, balance y tono (doble clic en una rueda para volver a 0). |
-| **Cuatro visuales en vivo** | Ondas, Vúmetro 3D, Halo y Vuelo, movidos por la señal real de audio. |
+| **Ecualizador de 20 bandas** | De −12 a +12 dB por banda, con ruedas de ampli, balance y tono (doble clic en una rueda para volver a 0). |
+| **Presets del ecualizador** | Doce curvas de fábrica (Plano, Graves, Voz, Brillo, Rock, Pop, Jazz, Clásica, Dance, Electrónica, Acústico, Loudness) y las tuyas: guarda la curva actual con un nombre y bórrala cuando quieras. |
+| **Cuatro visuales en vivo** | Ondas, Vúmetro 3D, Halo y Vuelo, movidos por la señal real de audio. Un clic en la pantalla quita los textos y deja solo el visual. |
 | **Editor de lista** | Añade archivos o carpetas, reordena arrastrando, atajos de teclado y listas `m3u` / `pls` / `cue`. |
 | **Editor de etiquetas ID3** | Lee ID3v1/v2.2/2.3/2.4 y escribe ID3v2.4 en el archivo conservando la carátula y el resto de etiquetas. |
 | **Búsqueda en internet** | Completa etiquetas y carátula con MusicBrainz y Cover Art Archive en un clic. |
@@ -56,6 +57,10 @@ Baja el último `.dmg` desde **[Releases](https://github.com/nuvolacat/Soniqus/r
 <p align="center">
   <img src="docs/img/console-id3.png" alt="Editor de etiquetas ID3" width="410">
   <img src="docs/img/console-settings.png" alt="Ajustes" width="410">
+</p>
+<p align="center">
+  <img src="docs/img/console-presets.png" alt="Presets del ecualizador" width="410">
+  <img src="docs/img/console-clean.png" alt="Pantalla despejada: solo el visual" width="410">
 </p>
 <p align="center">
   <img src="docs/img/mini-bar.png" alt="Barra mini" width="640">
@@ -76,7 +81,7 @@ Baja el último `.dmg` desde **[Releases](https://github.com/nuvolacat/Soniqus/r
 | `⌘O` | Abrir archivos o carpetas |
 | `⌘S` | Guardar la lista como `m3u` |
 
-Doble clic en la carcasa alterna entre el modo compacto y la consola. Suelta archivos o carpetas en cualquier punto de la ventana para añadirlos.
+Doble clic en la carcasa alterna entre el modo compacto y la consola. Suelta archivos o carpetas en cualquier punto de la ventana para añadirlos. Pulsa en cualquier punto de la barra de progreso (o del anillo de puntos en el modo compacto) para saltar ahí; en el modo compacto, un clic en la pantalla superior cambia de visual.
 
 ## Compilar desde el código
 

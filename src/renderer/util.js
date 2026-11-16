@@ -110,6 +110,11 @@ const STR = [
   ['Atajos de teclado', 'Dreceres de teclat', 'Keyboard shortcuts'], ['Doble clic: volver a 0', 'Doble clic: torna a 0', 'Double-click: back to 0'], ['I', 'E', 'L'], ['D', 'D', 'R'],
   ['DATOS', 'DADES', 'DATA'], ['Borrar caché', 'Esborra la memòria cau', 'Clear cache'], ['Ajustes, lista y datos guardados', 'Ajustos, llista i dades desades', 'Settings, playlist and saved data'], ['BORRAR TODO', 'ESBORRA-HO TOT', 'ERASE ALL'], ['¿SEGURO? PULSA OTRA VEZ', 'SEGUR? PREM UN ALTRE COP', 'SURE? PRESS AGAIN'],
   ['Código abierto, licencia MIT', 'Codi obert, llicència MIT', 'Open source, MIT license'],
+  ['PERSONALIZADO', 'PERSONALITZAT', 'CUSTOM'], ['SIN GUARDAR', 'SENSE DESAR', 'UNSAVED'], ['DE FÁBRICA', 'DE FÀBRICA', 'BUILT-IN'], ['GUARDADO', 'DESAT', 'SAVED'],
+  ['CANCELAR', 'CANCEL·LA', 'CANCEL'], ['¿BORRAR?', 'ESBORRAR?', 'DELETE?'], ['Nombre del preset', 'Nom del preset', 'Preset name'], ['Preset anterior', 'Preset anterior', 'Previous preset'], ['Preset siguiente', 'Preset següent', 'Next preset'],
+  ['PLANO', 'PLA', 'FLAT'], ['CLÁSICA', 'CLÀSSICA', 'CLASSICAL'], ['ELECTRÓNICA', 'ELECTRÒNICA', 'ELECTRONIC'], ['ACÚSTICO', 'ACÚSTIC', 'ACOUSTIC'],
+  ['＋ GUARDAR ACTUAL…', '＋ DESA L’ACTUAL…', '＋ SAVE CURRENT…'],
+  ['Cambiar el efecto visual', "Canvia l'efecte visual", 'Change the visual effect'],
   ['Grabando en', 'Enregistrant a', 'Recording to'],
 ];
 const D = new Map(STR.map(([es, ca, en]) => [es, [ca, en]]));

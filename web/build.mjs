@@ -148,7 +148,8 @@ fs.writeFileSync(path.join(dist, 'assets/site.js'), `// soniqus.com — visualiz
 `);
 
 // recursos
-fs.copyFileSync(path.join(unp, 'dc31b206-e47b-462f-a975-e7db4563ec9a.png'), path.join(dist, 'assets/soniqus-app.png'));
+// La imagen del reproductor es una captura real de la app (web/appshot.js); si falta, se usa la del diseño.
+fs.copyFileSync(fs.existsSync(path.join(here, 'soniqus-app.png')) ? path.join(here, 'soniqus-app.png') : path.join(unp, 'dc31b206-e47b-462f-a975-e7db4563ec9a.png'), path.join(dist, 'assets/soniqus-app.png'));
 fs.copyFileSync(path.join(root, 'assets/nuvola-logo.png'), path.join(dist, 'assets/nuvola-logo.png'));
 fs.writeFileSync(path.join(dist, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0a0f5c"/><circle cx="50" cy="50" r="23.5" fill="none" stroke="#f4ff3a" stroke-width="9"/><circle cx="50" cy="50" r="8.5" fill="#f4ff3a"/></svg>\n`);
 fs.copyFileSync(path.join(root, 'build/icon-32.png'), path.join(dist, 'favicon-32.png'));

@@ -65,7 +65,8 @@ function conv(html) {
       else if (k === 'style-hover') classes.push(cls(hov, 'hv', val));
       else if (k === 'style-focus') classes.push(cls(foc, 'fc', val));
       else if (/^on[A-Z]/.test(k) || k === 'value') s += ` ${k}={${expr(unwrap(val))}}`;
-      else if (k === 'title' || k === 'alt') s += ` ${k}={T(${JSON.stringify(val)})}`;
+      else if (k === 'title' || k === 'alt' || k === 'placeholder') s += ` ${k}={T(${JSON.stringify(val)})}`;
+      else if (k === 'maxLength') s += ` maxLength={${val}}`;
       else if (k === 'tabIndex') s += ` tabIndex={${val}}`;
       else if (k === 'draggable') s += ' draggable';
       else if (val === true) s += ` ${k}=""`;
@@ -107,6 +108,47 @@ for (const [label, key] of [['Inicio soniqus', 'inicio'], ['Música', 'musica'],
 con = patch(con, `<div onPointerDown="{{ k.down }}"`, `<div onPointerDown="{{ k.down }}" onDoubleClick="{{ k.reset }}" title="Doble clic: volver a 0"`);
 con = patch(con, `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ sk.label }};width:38px">{{ k.label }}</span>`,
   `<span style="display:flex;flex-direction:column;gap:3px;width:38px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ sk.label }}">{{ k.label }}</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:{{ sk.label }};opacity:.75;white-space:nowrap">{{ k.val }}</span></span>`);
+// Sombra suave en el título y el artista del modo visual, para que no se fundan con los efectos de detrás.
+con = patch(con, `<div style="font-size:38px;font-weight:700;color:#eef0ff;line-height:1.05;letter-spacing:-.02em">{{ cur.title }}</div>`, `<div style="font-size:38px;font-weight:700;color:#eef0ff;line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 8px rgba(2,4,26,.9), 0 0 3px rgba(2,4,26,.85)">{{ cur.title }}</div>`);
+con = patch(con, `<div style="font-size:16px;color:#aab0e8">{{ cur.artist }}</div>`, `<div style="font-size:16px;color:#aab0e8;text-shadow:0 1px 5px rgba(2,4,26,.95), 0 0 2px rgba(2,4,26,.9)">{{ cur.artist }}</div>`);
+// Clic en la pantalla del modo visual: los textos salen (con la misma animación por bloques de los menús) y queda solo el efecto.
+con = patch(con, `<div style="animation:{{ viewAnim }};position:absolute;inset:0;padding:28px 30px;display:flex;flex-direction:column;justify-content:space-between">`, `<div onClick="{{ vizClick }}" style="animation:{{ viewAnim }};position:absolute;inset:0;padding:28px 30px;display:flex;flex-direction:column;justify-content:space-between">`);
+con = patch(con, `<div style="animation:{{ b.l1 }};display:flex;flex-direction:column;gap:8px;max-width:360px">`, `<div style="animation:{{ vizA.t }};opacity:{{ vizA.op }};pointer-events:{{ vizA.pe }};transition:opacity .3s;display:flex;flex-direction:column;gap:8px;max-width:360px">`);
+con = patch(con, `<div style="animation:{{ b.u3 }};display:flex;flex-direction:column;gap:10px;max-width:420px">`, `<div style="animation:{{ vizA.p }};opacity:{{ vizA.op }};pointer-events:{{ vizA.pe }};transition:opacity .3s;display:flex;flex-direction:column;gap:10px;max-width:420px">`);
+con = patch(con, `<div style="position:absolute;top:24px;right:26px;pointer-events:none;display:flex;align-items:center;gap:6px;`, `<div style="position:absolute;top:24px;right:26px;pointer-events:none;opacity:{{ vizA.op }};transition:opacity .4s;display:flex;align-items:center;gap:6px;`);
+// Barra de progreso: toda la barra es pulsable y arrastrable (antes solo cada cuadradito), con una zona de clic más alta.
+con = patch(con, `<div style="display:flex;gap:3px">
+                      <sc-for list="{{ segs }}" as="s" hint-placeholder-count="60"><span onClick="{{ s.seek }}" style="flex:1;height:8px;border-radius:2px;background:{{ s.c }};cursor:pointer"></span></sc-for>`,
+  `<div onPointerDown="{{ seekDown }}" onClick="{{ presetStop }}" style="display:flex;gap:3px;padding:9px 0;margin:-9px 0;cursor:pointer;touch-action:none">
+                      <sc-for list="{{ segs }}" as="s" hint-placeholder-count="60"><span style="flex:1;height:8px;border-radius:2px;background:{{ s.c }}"></span></sc-for>`);
+// Modo compacto: lo mismo para el anillo de puntos (se busca por el ángulo donde se pulsa).
+compact = patch(compact, `<div style="position:absolute;inset:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center">`,
+  `<div onPointerDown="{{ ringDown }}" style="position:absolute;inset:0;border-radius:50%;touch-action:none"></div><div style="position:absolute;inset:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;pointer-events:none">`);
+// Modo compacto: un clic en la pantalla superior pasa al siguiente efecto visual.
+compact = patch(compact, `<div style="position:absolute;left:44px;top:24px;width:252px;height:252px;border-radius:50%;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);overflow:hidden;`, `<div onClick="{{ midClick }}" title="Cambiar el efecto visual" style="position:absolute;left:44px;top:24px;width:252px;height:252px;border-radius:50%;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);overflow:hidden;`);
+// Presets del ecualizador: selector desplegable en la cabecera del panel de audio, alineado con el botón de plegar
+// (misma altura y mismo aro que el botón). No está en el prototipo: se añade con su mismo lenguaje visual.
+const PRESETS_UI = `<div data-preset-box onClick="{{ presetStop }}" style="position:relative;display:flex;align-items:center;gap:12px;cursor:default">
+  <div onClick="{{ presetToggle }}" style="width:240px;height:32px;box-sizing:border-box;border-radius:16px;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);box-shadow:0 0 0 3px #1c1d21, 0 0 0 4px rgba(255,255,255,.14), inset 0 4px 10px rgba(0,0,0,.7);display:flex;align-items:center;gap:8px;padding:0 14px;cursor:pointer">
+    <sc-if value="{{ presetNaming }}"><input data-preset-input value="{{ presetDraft }}" onChange="{{ presetType }}" onKeyDown="{{ presetKey }}" placeholder="Nombre del preset" maxLength="24" style="flex:1;min-width:0;background:transparent;border:none;outline:none;color:#eef0ff;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.08em;padding:0"></sc-if>
+    <sc-if value="{{ presetShowing }}"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;color:#8f96d6;flex:none">PRESET</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.1em;color:#f4ff3a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ presetName }}</span><span style="margin-left:auto;flex:none;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #f4ff3a;transform:rotate({{ presetCaret }}deg);transition:transform .2s"></span></sc-if>
+  </div>
+  <sc-for list="{{ presetBtns }}" as="pb"><div onClick="{{ pb.on }}" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ pb.fg }};background:{{ pb.bg }};box-shadow:{{ pb.sh }};border-radius:10px;padding:6px 10px;cursor:pointer;white-space:nowrap;flex:none" style-hover="filter:brightness(1.15)">{{ pb.label }}</div></sc-for>
+  <sc-if value="{{ presetOpen }}">
+    <div style="position:absolute;left:0;top:44px;z-index:30;width:420px;max-height:240px;overflow-y:auto;border-radius:14px;background:rgba(6,10,51,.97);box-shadow:0 0 0 3px #1c1d21, 0 0 0 4px rgba(255,255,255,.2), 0 18px 34px rgba(0,0,0,.6);padding:8px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:1px 6px;cursor:default;animation:sqB-d .22s cubic-bezier(.16,1,.3,1) both">
+      <sc-for list="{{ presetList }}" as="pi">
+        <div onClick="{{ pi.on }}" style="display:flex;align-items:center;gap:8px;min-width:0;padding:5px 10px;border-radius:8px;background:{{ pi.bg }};color:{{ pi.fg }};cursor:pointer" style-hover="box-shadow:inset 0 0 0 1.5px #f4ff3a">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pi.label }}</span>
+          <sc-if value="{{ pi.user }}"><span onClick="{{ pi.del }}" title="Borrar" style="margin-left:auto;flex:none;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;opacity:.7;padding:0 2px;white-space:nowrap" style-hover="opacity:1">{{ pi.delLabel }}</span></sc-if>
+        </div>
+      </sc-for>
+      <div onClick="{{ presetNew }}" style="grid-column:1 / -1;margin-top:4px;padding:8px 10px 3px;border-top:1px solid rgba(143,150,214,.25);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;color:#f4ff3a;cursor:pointer" style-hover="color:#ffffff">＋ GUARDAR ACTUAL…</div>
+    </div>
+  </sc-if>
+</div>`;
+con = patch(con, `<div onClick="{{ toggleEq }}" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">`,
+  `<div onClick="{{ toggleEq }}" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;position:relative;z-index:5"><div style="display:flex;align-items:center;gap:16px">`);
+con = patch(con, `margin-top:{{ chevronOff }}px"></span></div>`, `margin-top:{{ chevronOff }}px"></span></div>` + PRESETS_UI + `</div>`);
 // Vista «Acerca de» dentro de la pantalla (mismo lenguaje visual que el Panel de control).
 const ABOUT = `<sc-if value="{{ isAbout }}">
 <div style="animation:{{ viewAnim }};position:absolute;inset:0;padding:22px 96px 18px 28px;display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;background:radial-gradient(90% 120% at 100% 100%, rgba(43,59,255,.28), transparent 60%), rgba(6,10,51,.94)">

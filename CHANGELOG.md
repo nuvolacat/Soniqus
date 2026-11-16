@@ -1,5 +1,13 @@
 # Cambios de Soniqus
 
+## 1.26.1116.2039 — 16-nov-2026
+- Modo visual: un clic en la pantalla la despeja y deja solo el efecto; al cambiar de efecto vuelven los textos (con la animación por bloques de los menús).
+- Barra de progreso: toda la barra es pulsable y arrastrable, también el anillo de puntos del modo compacto.
+- Modo compacto: un clic en la pantalla superior cambia de efecto visual.
+- Título y artista del modo visual con una sombra suave para que se lean sobre los efectos.
+- Presets del ecualizador: selector desplegable en la cabecera del panel de audio, con 12 presets de fábrica (Plano, Graves, Voz, Brillo, Rock, Pop, Jazz, Clásica, Dance, Electrónica, Acústico, Loudness).
+- Se pueden guardar presets propios con nombre y borrarlos.
+
 ## 1.26.1116.1931 — 16-nov-2026
 - Soniqus pasa a ser código abierto (licencia MIT): «Acerca de» lo indica y enlaza al repositorio de GitHub.
 

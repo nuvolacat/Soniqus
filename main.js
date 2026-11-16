@@ -364,7 +364,7 @@ else {
     ipc();
     buildMenu();
     createWin();
-    if (TEST) { try { require('./tools/selftest')({ app, win, dir: TEST }); } catch (e) { console.error(e); app.exit(1); } }
+    if (TEST) { try { require(process.env.SONIQUS_TEST_SCRIPT || './tools/selftest')({ app, win, dir: TEST }); } catch (e) { console.error(e); app.exit(1); } }
   });
   app.on('activate', () => { if (win) win.show(); else if (app.isReady()) createWin(); });
   app.on('window-all-closed', () => app.quit());

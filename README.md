@@ -44,8 +44,9 @@ Grab the latest `.dmg` from the **[Releases page](https://github.com/nuvolacat/S
 | | |
 |---|---|
 | **Three window modes** | Compact twin-screen player, full *Navigation console*, and a tiny mini bar. Frameless, shaped windows you can drag anywhere. |
-| **20-band equalizer** | −12…+12 dB per band, presets, plus amp, balance and pitch knobs (double-click a knob to reset it). |
-| **Four live visuals** | Rings, 3D VU meter, Halo and Flight — all driven by the real audio signal. |
+| **20-band equalizer** | −12…+12 dB per band, plus amp, balance and pitch knobs (double-click a knob to reset it). |
+| **EQ presets** | Twelve built-in curves (Flat, Bass, Voice, Treble, Rock, Pop, Jazz, Classical, Dance, Electronic, Acoustic, Loudness) and your own: save the current curve with a name, delete it when you're done. |
+| **Four live visuals** | Rings, 3D VU meter, Halo and Flight — all driven by the real audio signal. Click the screen to clear the text and leave only the visual. |
 | **Playlist editor** | Add files or folders, drag to reorder, keyboard shortcuts, `m3u` / `pls` / `cue` playlists. |
 | **ID3 tag editor** | Reads ID3v1/v2.2/2.3/2.4, writes ID3v2.4 back to the file keeping the cover and every other frame. |
 | **Online lookup** | Fill in missing tags and cover art from MusicBrainz and the Cover Art Archive in one click. |
@@ -63,6 +64,10 @@ Grab the latest `.dmg` from the **[Releases page](https://github.com/nuvolacat/S
 <p align="center">
   <img src="docs/img/console-id3.png" alt="ID3 tag editor" width="410">
   <img src="docs/img/console-settings.png" alt="Settings" width="410">
+</p>
+<p align="center">
+  <img src="docs/img/console-presets.png" alt="Equalizer presets" width="410">
+  <img src="docs/img/console-clean.png" alt="Screen cleared: only the visual" width="410">
 </p>
 <p align="center">
   <img src="docs/img/mini-bar.png" alt="Mini bar" width="640">
@@ -83,7 +88,7 @@ Grab the latest `.dmg` from the **[Releases page](https://github.com/nuvolacat/S
 | `⌘O` | Open files or folders |
 | `⌘S` | Save the playlist as `m3u` |
 
-Double-click the case to switch between compact mode and the console. Drop files or folders anywhere on the window to add them.
+Double-click the case to switch between compact mode and the console. Drop files or folders anywhere on the window to add them. Click anywhere on the progress bar (or the dotted ring in compact mode) to seek; click the top screen in compact mode to switch visuals.
 
 ## Build from source
 

@@ -12,3 +12,5 @@ diseno/design_handoff_soniqus/support.js
 src/renderer/views.gen.jsx
 src/renderer/views.gen.css
 .DS_Store
+web/ig-opciones/
+web/_*.html

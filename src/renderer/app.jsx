@@ -29,20 +29,29 @@ const SKINS = [
   { key: 'amarillo', name: 'Amarillo señal', label: '#0a0f5c', logo: '#0a0f5c',
     body: "linear-gradient(118deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.35) 34%, rgba(255,255,255,0) 48%), radial-gradient(130% 90% at 25% 0%, #f8ff86 0%, #e9f520 50%, #b9c400 100%)" },
 ];
+// Presets de fábrica del ecualizador (20 bandas, de 30 Hz a 18 kHz). Los del usuario se guardan aparte.
+// «Personal» no es un preset: es el nombre que se muestra cuando la curva se ha tocado a mano y no está guardada.
 const PRESETS = {
   Plano: Array(20).fill(0),
   Graves: [8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   Voz: [-3, -2, -1, 0, 1, 3, 5, 6, 6, 5, 4, 3, 1, 0, -1, -2, -2, -3, -3, -3],
   Brillo: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8],
-  Personal: [3, 4, 5, 4, 2, 1, 0, -1, -1, 0, 1, 2, 2, 3, 3, 2, 1, 0, -1, -2],
+  Rock: [5, 5, 4, 4, 3, 2, 0, -1, -2, -2, -1, 0, 1, 2, 3, 4, 4, 5, 5, 5],
+  Pop: [-1, -1, 0, 1, 2, 3, 4, 4, 4, 3, 2, 1, 0, 0, -1, -1, -1, -1, -2, -2],
+  Jazz: [3, 3, 3, 2, 2, 1, 0, 0, -1, -1, -1, 0, 1, 1, 2, 2, 3, 3, 3, 3],
+  'Clásica': [4, 4, 3, 3, 2, 2, 1, 0, 0, 0, 0, 0, -1, -1, -1, 0, 1, 2, 3, 3],
+  Dance: [7, 7, 6, 5, 4, 2, 1, 0, -1, -2, -2, -1, 0, 1, 2, 3, 4, 4, 3, 3],
+  'Electrónica': [6, 6, 5, 4, 2, 0, -1, -2, -1, 0, 1, 2, 2, 1, 2, 3, 4, 5, 5, 5],
+  'Acústico': [3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2],
+  Loudness: [7, 7, 6, 5, 3, 2, 0, -1, -2, -2, -2, -1, 0, 1, 2, 4, 5, 6, 6, 6],
 };
 const TRANS = [['iris', 'Iris'], ['crt', 'Barrido CRT'], ['vortex', 'Vórtice'], ['glitch', 'Glitch'], ['flip', 'Volteo 3D'], ['slide', 'Deslizar'], ['none', 'Ninguna']];
 const TABS = ['Sistema', 'Lista', 'Audio', 'Menú', 'Archivos', 'Visuales', 'Internet', 'Aspecto'];
 const FREQS = Array.from({ length: 20 }, (_, i) => 30 * Math.pow(600, i / 19)); // 30 Hz … 18 kHz
 const SIZES = { compact: [340, 680], full: [780, 786], min: [780, 72] };
 const DEF_PREFS = { onTop: false, startup: false, rememberPos: true, lockWin: false, translucent: false, lang: 'Español', append: true, showFile: false, saveInfo: true, clearOnLoad: false, out: 'Salida del sistema', dsp: 'Ninguno', masterVol: false, menuSmooth: 0.8, menuSpeed: 0.6, fullscreen: 'Acelerada', formats: ['mp3', 'wav', 'ogg', 'flac', 'm4a', 'aac', 'opus', 'm3u', 'pls', 'cue'], blocks: true, blur: false, smoke: true, zoom: true, fxLevel: 0.6, zoomSpeed: 0.5, covers: true, songInfo: true, updates: false, stream: true };
-const UI_KEYS = ['skin', 'trans', 'vizKind', 'modeMid', 'modeCon', 'vol', 'repeat', 'shuffle', 'autoAdd', 'showRemain', 'eqOpen', 'win', 'setTab', 'preset', 'eq', 'amp', 'bal', 'pitch'];
-const VOLATILE = new Set(['resetArm', 't', 'exiting', 'tabExit', 'tabSwitch', 'infoVis', 'infoLeaving', 'dragFrom', 'dragOver', 'id3Status', 'navHist', 'view', 'playing', 'sel']);
+const UI_KEYS = ['skin', 'trans', 'vizKind', 'modeMid', 'modeCon', 'vol', 'repeat', 'shuffle', 'autoAdd', 'showRemain', 'eqOpen', 'win', 'setTab', 'preset', 'eq', 'amp', 'bal', 'pitch', 'userPresets'];
+const VOLATILE = new Set(['vizClean', 'presetOpen', 'presetNaming', 'presetDraft', 'presetDelArm', 'resetArm', 't', 'exiting', 'tabExit', 'tabSwitch', 'infoVis', 'infoLeaving', 'dragFrom', 'dragOver', 'id3Status', 'navHist', 'view', 'playing', 'sel']);
 const TAG_KEYS = ['title', 'artist', 'album', 'year', 'genre', 'track', 'comment'];
 
 let UID = 0;
@@ -71,13 +80,40 @@ class App extends React.Component {
       exiting: false, tabExit: false, infoVis: false, infoLeaving: false,
       playing: false, idx, sel: idx, t: 0, modeMid: 0, modeCon: 1, navHist: [], win: 'full', setTab: 'Sistema', prefs,
       showRemain: false, autoAdd: true, preset: 'Plano', dragFrom: null, dragOver: null, vol: 0.7, view: this.tracks.length ? 'viz' : 'home', repeat: false, shuffle: false,
-      eqOpen: true, eq: Array(20).fill(0), amp: 0.5, bal: 0, pitch: 0, skin: 'hielo', trans: 'iris', vizKind: 'ondas',
+      eqOpen: true, eq: Array(20).fill(0), amp: 0.5, bal: 0, pitch: 0, userPresets: {}, presetOpen: false, presetNaming: false, presetDraft: '', presetDelArm: null, skin: 'hielo', trans: 'iris', vizKind: 'ondas',
       ...ui,
     };
     if (!['compact', 'full', 'min'].includes(this.state.win)) this.state.win = 'full';
     if (!Array.isArray(this.state.eq) || this.state.eq.length !== 20) this.state.eq = Array(20).fill(0);
+    if (!this.state.userPresets || typeof this.state.userPresets !== 'object' || Array.isArray(this.state.userPresets)) this.state.userPresets = {};
     setLang(prefs.lang);
   }
+
+  // ---------- presets del ecualizador ----------
+  allPresets() { return { ...this.state.userPresets, ...PRESETS }; }
+  presetNames() { return [...Object.keys(PRESETS), ...Object.keys(this.state.userPresets).filter(k => !PRESETS[k]).sort((a, b) => a.localeCompare(b))]; }
+  applyPreset(name) {
+    const eq = this.allPresets()[name];
+    if (eq) this.setState({ preset: name, eq: eq.slice(0, 20), presetOpen: false, presetNaming: false, presetDelArm: null });
+  }
+  startNaming() {
+    const s = this.state;
+    this.setState({ presetNaming: true, presetOpen: false, presetDelArm: null, presetDraft: s.userPresets[s.preset] && !PRESETS[s.preset] ? s.preset : '' });
+    setTimeout(() => { const el = document.querySelector('[data-preset-input]'); if (el) { el.focus(); el.select(); } }, 30);
+  }
+  savePreset() {
+    let name = (this.state.presetDraft || '').trim().replace(/\s+/g, ' ').slice(0, 24);
+    if (!name) return;
+    // Un preset propio no puede pisar uno de fábrica ni llamarse como el estado «sin guardar».
+    const taken = k => Object.keys(PRESETS).some(p => p.toLowerCase() === k.toLowerCase()) || k.toLowerCase() === 'personal';
+    if (taken(name)) { let n = 2; while (taken(`${name} ${n}`) || this.state.userPresets[`${name} ${n}`]) n++; name = `${name} ${n}`; }
+    this.setState(st => ({ userPresets: { ...st.userPresets, [name]: st.eq.slice() }, preset: name, presetNaming: false, presetDraft: '' }));
+  }
+  deletePreset(name) {
+    if (!this.state.userPresets[name]) return;
+    this.setState(st => { const up = { ...st.userPresets }; delete up[name]; return { userPresets: up, preset: st.preset === name ? 'Personal' : st.preset, presetDelArm: null }; });
+  }
+  closePresetsOnOutside = e => { if (!(e.target instanceof Element) || !e.target.closest('[data-preset-box]')) this.setState({ presetOpen: false, presetDelArm: null }); };
 
   mkTrack(it) {
     const name = it.path ? noExt(baseName(it.path)) : (it.title || it.url);
@@ -119,6 +155,10 @@ class App extends React.Component {
     { const want = s.playing && s.win !== 'min';
       if (want && (!s.infoVis || s.infoLeaving)) { clearTimeout(this.infoT); this.setState({ infoVis: true, infoLeaving: false }); }
       else if (!want && s.infoVis && !s.infoLeaving) { this.setState({ infoLeaving: true }); clearTimeout(this.infoT); this.infoT = setTimeout(() => this.setState({ infoVis: false, infoLeaving: false }), 430); } }
+    if (prev.presetOpen !== s.presetOpen) {
+      window.removeEventListener('pointerdown', this.closePresetsOnOutside, true);
+      if (s.presetOpen) window.addEventListener('pointerdown', this.closePresetsOnOutside, true);
+    }
     if (prev.win !== s.win) this.applyWin(false);
     if (prev.win !== s.win || prev.eqOpen !== s.eqOpen) { this.setGhost(false); clearTimeout(this.ghT); this.ghT = setTimeout(this.recheckGhost, 750); }
     const P = s.prefs, Q = prev.prefs;
@@ -167,6 +207,7 @@ class App extends React.Component {
     this.setGhost(!el || el === document.documentElement || el === document.body || el.id === 'root' || el.hasAttribute('data-ghost'));
   };
   onPointerDown = e => {
+    this.downXY = [e.screenX, e.screenY];
     if (e.button !== 0 || this.state.prefs.lockWin) return;
     const el = e.target;
     if (!(el instanceof Element) || el.closest('input')) return;
@@ -190,7 +231,7 @@ class App extends React.Component {
     if (tag === 'INPUT' || tag === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
     const s = this.state, v = this.vals, T_ = this.tracks;
     if (e.key === ' ') { e.preventDefault(); v.toggle(); return; }
-    if (e.key === 'Escape') { v.back(); return; }
+    if (e.key === 'Escape') { if (s.presetOpen) this.setState({ presetOpen: false, presetDelArm: null }); else v.back(); return; }
     if (s.win === 'full' && s.view === 'list') {
       if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); this.removeTrack(s.sel); }
       else if (e.key === 'ArrowUp' && e.altKey) { e.preventDefault(); this.moveTrack(s.sel, s.sel - 1); }
@@ -267,7 +308,7 @@ class App extends React.Component {
     switch (tab) {
       case 'Sistema': return [head('OPCIONES DE SISTEMA'), pc('onTop', 'Siempre encima', 'Sobre otras ventanas'), pc('startup', 'Abrir al iniciar', 'Arranca con el sistema'), pc('rememberPos', 'Recordar posición', 'Al volver a abrir'), pc('lockWin', 'Bloquear ventana', 'Evita moverla sin querer'), pc('translucent', 'Ventana translúcida', 'Deja ver el escritorio'), head('IDIOMA'), pseg('lang', 'Idioma', 'Interfaz', ['Español', 'Català', 'English']), head('DATOS'), seg('Borrar caché', 'Ajustes, lista y datos guardados', [s.resetArm ? { label: T('¿SEGURO? PULSA OTRA VEZ'), on: () => sq.resetAll(), bg: '#f4ff3a', fg: '#0a0f5c' } : opt('BORRAR TODO', false, () => { this.setState({ resetArm: true }); clearTimeout(this.resetT); this.resetT = setTimeout(() => this.setState({ resetArm: false }), 4000); })])];
       case 'Lista': return [head('OPCIONES DE LISTA'), pc('append', 'Añadir a la lista', 'No reemplazar al abrir'), sc('autoAdd', 'Reproducir al añadir', 'Empieza a sonar al cargar'), pc('clearOnLoad', 'Vaciar al cargar carpeta', 'Empieza una lista nueva'), pc('showFile', 'Ver nombre del archivo', 'En vez del título'), pc('saveInfo', 'Guardar info en lista', 'Duración y etiquetas'), head('ORDEN'), sc('repeat', 'Repetir', 'La canción actual'), sc('shuffle', 'Aleatorio', 'Al avanzar')];
-      case 'Audio': return [head('SALIDA'), pseg('out', 'Dispositivo', 'Dónde suena', ['Salida del sistema', 'Grabar a WAV'], v => (v === 'Grabar a WAV' ? this.startRec() : this.stopRec())), pseg('dsp', 'Procesador', 'Procesado extra', ['Ninguno', 'Reverberación', 'Fundido']), pc('masterVol', 'Volumen con el master', 'Usa el del sistema'), seg('Volumen', 'Nivel de salida', [0, 25, 50, 75, 100].map(v => opt(v + '%', Math.round(s.vol * 100) === v, () => this.setState({ vol: v / 100 })))), head('ECUALIZADOR'), sc('eqOpen', 'Panel de audio', 'Mostrar el ecualizador'), seg('Preset', '20 bandas', Object.keys(PRESETS).map(k => opt(k.toUpperCase(), s.preset === k, () => this.setState({ preset: k, eq: PRESETS[k].slice() })))), seg('Balance y tono', 'Volver al centro', [opt('RESTABLECER', true, () => this.setState({ bal: 0, pitch: 0 }))])];
+      case 'Audio': return [head('SALIDA'), pseg('out', 'Dispositivo', 'Dónde suena', ['Salida del sistema', 'Grabar a WAV'], v => (v === 'Grabar a WAV' ? this.startRec() : this.stopRec())), pseg('dsp', 'Procesador', 'Procesado extra', ['Ninguno', 'Reverberación', 'Fundido']), pc('masterVol', 'Volumen con el master', 'Usa el del sistema'), seg('Volumen', 'Nivel de salida', [0, 25, 50, 75, 100].map(v => opt(v + '%', Math.round(s.vol * 100) === v, () => this.setState({ vol: v / 100 })))), head('ECUALIZADOR'), sc('eqOpen', 'Panel de audio', 'Mostrar el ecualizador'), seg('Preset', '20 bandas', this.presetNames().map(k => opt(k.toUpperCase(), s.preset === k, () => this.applyPreset(k)))), seg('Balance y tono', 'Volver al centro', [opt('RESTABLECER', true, () => this.setState({ bal: 0, pitch: 0 }))])];
       case 'Menú': return [head('TRANSICIÓN ENTRE PANTALLAS'), chk('Entrada por bloques', 'Los elementos llegan escalonados', P.blocks !== false, () => setP('blocks', P.blocks === false)), seg('Estilo', 'Toca para previsualizar', TRANS.map(([k, l]) => opt(l.toUpperCase(), (s.trans || 'iris') === k, () => { this.setState({ trans: k, view: '_', tabSwitch: false }); requestAnimationFrame(() => this.setState({ view: 'settings' })); }))), head('ANIMACIÓN DE MENÚS'), sld('menuSmooth', 'Suavidad', 'Fluidez del despliegue'), sld('menuSpeed', 'Velocidad', 'Duración del despliegue'), head('PANTALLA'), seg('Contador', 'Qué muestra', [['TRANSCURRIDO', false], ['RESTANTE', true]].map(([l, v]) => opt(l, s.showRemain === v, () => this.setState({ showRemain: v })))), pseg('fullscreen', 'Pantalla completa', 'Modo de dibujo', ['Acelerada', 'Compatible'])];
       case 'Archivos': return [head('FORMATOS ASOCIADOS'), seg('Audio', 'Se abren con soniqus', ['mp3', 'wav', 'ogg', 'flac', 'm4a', 'aac', 'opus'].map(fmt)), seg('Listas', 'Se abren con soniqus', ['m3u', 'pls', 'cue'].map(fmt))];
       case 'Visuales': return [head('EFECTOS VISUALES'), seg('Pantalla principal', 'Consola de navegación', MODES.map((l, i) => opt(l, s.modeCon === i, () => this.setState({ modeCon: i })))), seg('Pantalla compacta', 'Círculo superior', MODES.map((l, i) => opt(l, s.modeMid === i, () => this.setState({ modeMid: i })))), seg('Estilo de ondas', 'Anillos o barras', [['ANILLOS', 'ondas'], ['BARRAS', 'barras']].map(([l, v]) => opt(l, kind === v, () => this.setState({ vizKind: v })))), pc('blur', 'Desenfocar', 'Suaviza los visuales'), pc('smoke', 'Humo', 'Estela larga en Halo'), pc('zoom', 'Zoom', 'Giro del vúmetro 3D'), sld('fxLevel', 'Nivel de efectos', 'Intensidad del brillo', 'BAJO', 'ALTO'), sld('zoomSpeed', 'Velocidad del zoom', 'Giro del vúmetro')];
@@ -784,13 +825,13 @@ class App extends React.Component {
     const glow = on => (on ? 'inset 0 1px 0 rgba(255,255,255,.7), 0 0 0 2px #0a0e45, 0 0 12px rgba(244,255,58,.7)' : 'inset 0 2px 3px rgba(0,0,0,.6), 0 0 0 2px #0a0e45, 0 1px 0 2px rgba(255,255,255,.08)');
     const tog = k => () => this.setState(st => ({ [k]: !st[k] }));
     const listOn = s.view === 'list';
-    const go = v => this.navSet(st => (st.view === v ? null : { tabSwitch: false, view: v, navHist: [...st.navHist, st.view].slice(-20) }));
+    const go = v => this.navSet(st => (st.view === v ? null : { tabSwitch: false, vizClean: false, view: v, navHist: [...st.navHist, st.view].slice(-20) }));
     const toggleList = () => go(s.view === 'list' ? 'viz' : 'list');
     const eject = () => this.openFiles();
     const volDeg = -135 + 270 * s.vol;
     const move = dir => () => this.setState(st => (st.view === 'list' && st.win === 'full'
       ? (T_.length ? { sel: (st.sel + dir + T_.length) % T_.length } : null)
-      : { modeCon: (st.modeCon + dir + 4) % 4, modeMid: (st.modeMid + dir + 4) % 4 }));
+      : { modeCon: (st.modeCon + dir + 4) % 4, modeMid: (st.modeMid + dir + 4) % 4, vizClean: false }));
     const opt = (label, on, fn) => ({ label: T(label), on: fn, bg: on ? '#f4ff3a' : 'transparent', fg: on ? '#0a0f5c' : '#eef0ff' });
     const MODES = ['ONDAS', 'VÚMETRO 3D', 'HALO', 'VUELO'];
     const tab = TABS.includes(s.setTab) ? s.setTab : 'Sistema';
@@ -803,8 +844,36 @@ class App extends React.Component {
     const plainTags = tg => Object.fromEntries(TAG_KEYS.map(k => [k, (tg && tg[k]) || '']));
     const pct = x => { const n = Math.round(x * 100); return (n > 0 ? '+' : '') + n + '%'; };
     const isMp3 = real && cur.path && /\.mp3$/i.test(cur.path);
+    // Modo visual despejado: un clic en la pantalla saca los textos; al cambiar de efecto vuelven a entrar.
+    const clean = !!s.vizClean && s.view === 'viz';
+    const outA = dir => (BK ? `sqBx-${dir} ${(0.32 * bsp).toFixed(2)}s cubic-bezier(.7,0,.84,0) both` : 'none');
+    const vizA = clean && !s.exiting ? { t: outA('l'), p: outA('u'), op: 0, pe: 'none' } : { t: b.l1, p: b.u3, op: 1, pe: 'auto' };
+    const seekTo = f => { if (!real || !cur.d) return; const t = Math.max(0, Math.min(D - 0.25, f * D)); if (this.audio && this.srcId === cur.id) this.audio.currentTime = t; this.setState({ t }); };
+    const dragSeek = (e, frac) => {
+      e.preventDefault(); e.stopPropagation();
+      seekTo(frac(e));
+      const mv = ev => seekTo(frac(ev));
+      const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); };
+      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+    };
     return {
-      sk, b,
+      sk, b, vizA,
+      seekDown: e => { const r = e.currentTarget.getBoundingClientRect(); dragSeek(e, ev => (ev.clientX - r.left) / r.width); },
+      ringDown: e => {
+        const r = e.currentTarget.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        const d0 = Math.hypot(e.clientX - cx, e.clientY - cy);
+        if (d0 < 94 || d0 > 126) return; // solo cuenta la corona de puntos; el resto de la pantalla sigue arrastrando la ventana
+        dragSeek(e, ev => { const a = Math.atan2(ev.clientX - cx, -(ev.clientY - cy)); return (a < 0 ? a + Math.PI * 2 : a) / (Math.PI * 2); });
+      },
+      midClick: e => {
+        if (e && this.downXY && (Math.abs(e.screenX - this.downXY[0]) > 4 || Math.abs(e.screenY - this.downXY[1]) > 4)) return; // venía de arrastrar la ventana
+        move(1)();
+      },
+      vizClick: e => {
+        // Si el clic viene de arrastrar la ventana por la pantalla, no cuenta.
+        if (e && this.downXY && (Math.abs(e.screenX - this.downXY[0]) > 4 || Math.abs(e.screenY - this.downXY[1]) > 4)) return;
+        this.setState(st => ({ vizClean: !st.vizClean }));
+      },
       viewAnim: (() => { const tr = s.trans || 'iris'; if (s.exiting) { if (tr === 'none') return 'none'; const dx = ((tr === 'glitch' ? 0.45 : 0.3) + (1 - P0.menuSpeed) * 0.7) * 0.6; return `sqTx-${tr} ${dx.toFixed(2)}s cubic-bezier(.7,0,.84,0) ${(BK ? 0.12 * bsp : 0).toFixed(2)}s both`; } if (tr === 'none' || (s.tabSwitch && s.view === 'settings')) return 'none'; const d = (tr === 'glitch' ? 0.45 : 0.3) + (1 - P0.menuSpeed) * 0.7; const ease = tr === 'glitch' ? 'linear' : (P0.menuSmooth > 0.5 ? 'cubic-bezier(.16,1,.3,1)' : 'ease-out'); return `sqT-${tr} ${d.toFixed(2)}s ${ease} both`; })(),
       isSettings: s.view === 'settings', goSettings: () => go('settings'),
       setTabs: TABS.map((k, i) => ({ anim: s.tabSwitch ? 'none' : ba('l', i * 0.6, 0.15), label: T(k), bg: tab === k ? '#f4ff3a' : 'transparent', fg: tab === k ? '#0a0f5c' : '#eef0ff', on: () => { if (k === s.setTab || s.tabExit) return; const done = () => { this.setState({ setTab: k, tabSwitch: true, tabExit: false, view: '_' }); requestAnimationFrame(() => this.setState({ view: 'settings' })); }; if (!BK) return done(); this.setState({ tabExit: true }); clearTimeout(this.tabT); this.tabT = setTimeout(done, (0.28 + 0.2) * bsp * 1000); } })),
@@ -938,7 +1007,27 @@ class App extends React.Component {
         { anim: s.eqOpen ? 'sqB-r .5s cubic-bezier(.16,1,.3,1) .36s both' : 'none', label: T('BAL'), deg: 135 * s.bal, down: this.drag('bal', -1, 1, 0.012), val: Math.round(s.bal * 100) === 0 ? '0%' : T(s.bal < 0 ? 'I' : 'D') + ' ' + Math.abs(Math.round(s.bal * 100)) + '%', reset: () => this.setState({ bal: 0 }) },
         { anim: s.eqOpen ? 'sqB-r .5s cubic-bezier(.16,1,.3,1) .42s both' : 'none', label: T('TONO'), deg: 135 * s.pitch, down: this.drag('pitch', -1, 1, 0.012), val: pct(s.pitch), reset: () => this.setState({ pitch: 0 }) },
       ],
-      flat: () => this.setState({ eq: Array(20).fill(0), amp: 0.5, bal: 0, pitch: 0, preset: 'Plano' }),
+      flat: () => this.setState({ eq: Array(20).fill(0), amp: 0.5, bal: 0, pitch: 0, preset: 'Plano', presetNaming: false, presetOpen: false }),
+      presetStop: e => e.stopPropagation(),
+      presetToggle: () => { if (!s.presetNaming) this.setState(st => ({ presetOpen: !st.presetOpen, presetDelArm: null })); },
+      presetOpen: !!s.presetOpen && !s.presetNaming, presetCaret: s.presetOpen ? 180 : 0,
+      presetNaming: !!s.presetNaming, presetShowing: !s.presetNaming, presetDraft: s.presetDraft || '',
+      presetName: s.preset === 'Personal' || !this.allPresets()[s.preset] ? T('PERSONALIZADO') : T(s.preset.toUpperCase()),
+      presetType: e => this.setState({ presetDraft: e.target.value }),
+      presetKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.savePreset(); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); this.setState({ presetNaming: false, presetDraft: '' }); } },
+      presetNew: () => this.startNaming(),
+      presetList: this.presetNames().map(k => {
+        const sel = s.preset === k, user = !PRESETS[k];
+        return { label: T(k.toUpperCase()), user, bg: sel ? '#f4ff3a' : 'transparent', fg: sel ? '#0a0f5c' : '#eef0ff', on: () => this.applyPreset(k),
+          delLabel: s.presetDelArm === k ? T('¿BORRAR?') : '✕',
+          del: e => { e.stopPropagation(); if (s.presetDelArm === k) this.deletePreset(k); else { this.setState({ presetDelArm: k }); clearTimeout(this.pdT); this.pdT = setTimeout(() => this.setState({ presetDelArm: null }), 4000); } } };
+      }),
+      presetBtns: (() => {
+        const yel = { bg: 'radial-gradient(circle at 38% 28%, #fdffc4 0%, #f4ff3a 38%, #c3cf00 100%)', fg: '#0a0f5c', sh: 'inset 0 2px 0 rgba(255,255,255,.6), inset 0 -4px 6px rgba(80,80,0,.35), 0 0 0 2px #0a0e45, 0 3px 6px rgba(0,0,0,.4)' };
+        const blu = { bg: 'linear-gradient(180deg,#3d49c9 0%,#1f2690 55%,#161c74 100%)', fg: '#eef0ff', sh: 'inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 3px rgba(0,0,0,.35), 0 0 0 2px #0a0e45, 0 3px 6px rgba(0,0,0,.4)' };
+        if (s.presetNaming) return [{ ...yel, label: T('GUARDAR'), on: () => this.savePreset() }, { ...blu, label: T('CANCELAR'), on: () => this.setState({ presetNaming: false, presetDraft: '' }) }];
+        return [{ ...yel, label: T('GUARDAR'), on: () => this.startNaming() }];
+      })(),
     };
   }
 

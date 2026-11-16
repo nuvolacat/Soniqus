@@ -38,6 +38,14 @@ module.exports = ({ app, win, dir }) => {
       await sleep(3500);
       report.afterOpen = await js(`(() => { const a = window.__app; return { tracks: a.tracks.map(t => [t.title, t.d, t.tech]), playing: a.state.playing, view: a.state.view, time: a.audio && a.audio.currentTime, paused: a.audio && a.audio.paused, ctx: a.ac && a.ac.state, energy: a.hist[0] && a.hist[0].reduce((x, y) => x + y, 0) }; })()`);
       await shot('02-vumetro3d');
+      // Barra de progreso: un clic en cualquier punto (también entre cuadraditos) lleva ahí.
+      report.barra = await js(`(async () => { const a = window.__app, w = ms => new Promise(r => setTimeout(r, ms)); const bar = [...document.querySelectorAll('div')].find(d => d.children.length === 60 && d.style.touchAction === 'none'); if (!bar) return 'sin barra'; const r = bar.getBoundingClientRect(); const x = r.left + r.width * 0.5 + 1.2, y = r.top + 3;
+        const hit = document.elementFromPoint(x, y); const ev = t => hit.dispatchEvent(new PointerEvent(t, { bubbles: true, clientX: x, clientY: y, screenX: x, screenY: y, button: 0 })); ev('pointerdown'); window.dispatchEvent(new PointerEvent('pointerup')); hit.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: x, clientY: y })); await w(300);
+        return { alto: Math.round(r.height), t: +a.audio.currentTime.toFixed(1), d: +a.audio.duration.toFixed(1), despejadoPorError: a.state.vizClean }; })()`);
+      // Clic en la pantalla: se despeja; al cambiar de efecto vuelven los textos.
+      await js(`window.__app.vals.vizClick()`); await sleep(1300); await shot('02b-despejado');
+      report.despejado = [await js(`window.__app.state.vizClean`)];
+      await js(`window.__app.vals.down()`); await sleep(1300); report.despejado.push(await js(`[window.__app.state.vizClean, window.__app.state.modeCon]`)); await shot('02c-vuelven');
       await js(`window.__app.setState({ modeCon: 2, modeMid: 2 })`); await sleep(1500); await shot('03-halo');
       await js(`window.__app.setState({ modeCon: 3, modeMid: 3 })`); await sleep(1500); await shot('04-vuelo');
       await js(`window.__app.setState({ modeCon: 0, modeMid: 0 })`); await sleep(1500); await shot('05-ondas');
@@ -51,8 +59,24 @@ module.exports = ({ app, win, dir }) => {
       report.closedHeight = await js(`document.querySelector('#root > div').offsetHeight`);
       await shot('11-eq-cerrado');
       await js(`window.__app.setState({ eqOpen: true, view: 'viz', modeCon: 1, modeMid: 1, skin: 'azul' })`); await sleep(1500); await shot('12-azul');
+      // Presets del ecualizador: de fábrica, guardar uno propio, choque de nombre, persistencia y borrado.
+      report.presets = await js(`(async () => { const a = window.__app, w = ms => new Promise(r => setTimeout(r, ms)), out = {};
+        a.applyPreset('Rock'); await w(50); out.rock = [a.state.preset, a.state.eq.join()];
+        a.bandDown(3)({ preventDefault() {}, currentTarget: { getBoundingClientRect: () => ({ bottom: 130, height: 130 }) }, clientY: 0 }); window.dispatchEvent(new Event('pointerup')); await w(50); out.tocado = [a.state.preset, a.state.eq[3], a.vals.presetName];
+        a.vals.presetBtns[0].on(); await w(120); out.nombrando = [a.state.presetNaming, document.activeElement && document.activeElement.hasAttribute('data-preset-input')];
+        a.setState({ presetDraft: '  Mi curva  ' }); await w(50); a.savePreset(); await w(50); out.guardado = [a.state.preset, Object.keys(a.state.userPresets), a.vals.presetName];
+        a.setState({ presetDraft: 'rock' }); await w(50); a.savePreset(); await w(50); out.choque = Object.keys(a.state.userPresets);
+        out.persistido = Object.keys(a.snapshot().ui.userPresets); a.deletePreset('rock 2'); await w(50); out.borrado = [a.state.preset, Object.keys(a.state.userPresets)];
+        a.applyPreset('Mi curva'); await w(50); a.setState({ view: 'viz' }); a.vals.presetToggle(); await w(50); out.lista = a.vals.presetList.map(x => x.label + (x.user ? '*' : '')); out.barras = document.querySelectorAll('[data-preset-box]').length; return out; })()`);
+      report.fullHeight2 = await js(`document.querySelector('#root > div').offsetHeight`);
+      await sleep(900); await shot('12b-presets-abierto');
+      await js(`window.__app.setState({ presetOpen: false })`); await sleep(400); await shot('12c-presets-cerrado');
+      await js(`window.__app.startNaming()`); await sleep(400); await shot('12d-presets-nombre'); await js(`window.__app.setState({ presetNaming: false })`);
       await js(`window.__app.setState({ win: 'compact', skin: 'hielo' })`); await sleep(1500); await shot('13-compacto');
       await js(`window.__app.setState({ modeMid: 0 })`); await sleep(1200); await shot('14-compacto-ondas');
+      report.compactoClic = await js(`(async () => { const a = window.__app, w = ms => new Promise(r => setTimeout(r, ms)); const m0 = a.state.modeMid; const el = document.querySelector('[title]'); const scr = [...document.querySelectorAll('div')].find(d => d.style.width === '252px' && d.style.overflow === 'hidden'); const r = scr.getBoundingClientRect(); const x = r.left + 126, y = r.top + 60; const tg = document.elementFromPoint(x, y); tg.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: x, clientY: y, screenX: x, screenY: y, button: 2 })); tg.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: x, clientY: y, screenX: x, screenY: y })); await w(200); const m1 = a.state.modeMid;
+        const ring = [...document.querySelectorAll('div')].find(d => d.style.touchAction === 'none' && d.style.borderRadius === '50%' && d.style.inset === '0px'); const q = ring.getBoundingClientRect(); const px = q.left + q.width / 2 + 112, py = q.top + q.height / 2; ring.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: px, clientY: py, button: 0 })); window.dispatchEvent(new PointerEvent('pointerup')); await w(300);
+        return { efecto: [m0, m1], anillo: { t: +a.audio.currentTime.toFixed(1), d: +a.audio.duration.toFixed(1) } }; })()`);
       await js(`window.__app.setState({ win: 'min' })`); await sleep(1000);
       report.miniHeight = await js(`document.querySelector('#root > div').offsetHeight`);
       await shot('15-mini');
