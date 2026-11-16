@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="2bb4f562-c00e-4434-8ccd-1c5d6c52ef7f"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>soniqus — So good to be true.</title>
+<meta name="description" content="soniqus — the music player your desktop has been missing since 1999. So good to be true.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' sc-camel-view-box='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0f5c'/%3E%3Ccircle cx='50' cy='50' r='23.5' fill='none' stroke='%23f4ff3a' stroke-width='9'/%3E%3Ccircle cx='50' cy='50' r='8.5' fill='%23f4ff3a'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("83cb2403-bd2c-4020-bbfb-4e427e6f5f02") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c9100614-fd7f-424c-95fc-4b3920381d06") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fd66420d-322f-49ae-b176-70bc31c615b3") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cce495eb-6ecf-41cd-b496-b55fff15f548") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("521f3ce0-3a0b-4a6f-8990-f43118e11ba0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("1561d2e3-d78b-4d25-b547-a761abe8bd70") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("83cb2403-bd2c-4020-bbfb-4e427e6f5f02") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c9100614-fd7f-424c-95fc-4b3920381d06") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fd66420d-322f-49ae-b176-70bc31c615b3") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cce495eb-6ecf-41cd-b496-b55fff15f548") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("521f3ce0-3a0b-4a6f-8990-f43118e11ba0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("1561d2e3-d78b-4d25-b547-a761abe8bd70") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("b18af977-cc64-4ad9-8358-f0f1a62dba6a") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("4ad76086-116b-49b9-b13f-093016b60579") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("78852696-3bfb-405a-b329-82a801c3818c") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b18af977-cc64-4ad9-8358-f0f1a62dba6a") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("4ad76086-116b-49b9-b13f-093016b60579") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("78852696-3bfb-405a-b329-82a801c3818c") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("396842a5-7475-4593-9581-facdc9e40a73") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("b03725bb-f309-4058-ba98-3a8314d3cdf5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("542680e6-0f3e-4b95-844c-9867eac34dfd") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9e4d1c2e-6022-49a1-a2c7-686c98680d75") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e4f4755c-e818-49da-b84f-6c2247198f5a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("396842a5-7475-4593-9581-facdc9e40a73") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b03725bb-f309-4058-ba98-3a8314d3cdf5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("542680e6-0f3e-4b95-844c-9867eac34dfd") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("9e4d1c2e-6022-49a1-a2c7-686c98680d75") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("e4f4755c-e818-49da-b84f-6c2247198f5a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("396842a5-7475-4593-9581-facdc9e40a73") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("b03725bb-f309-4058-ba98-3a8314d3cdf5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("542680e6-0f3e-4b95-844c-9867eac34dfd") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("9e4d1c2e-6022-49a1-a2c7-686c98680d75") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("e4f4755c-e818-49da-b84f-6c2247198f5a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#0a0f5c;color:#eef0ff;font-family:'Space Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#f4ff3a;text-decoration:none}a:hover{color:#fff}
+::selection{background:#f4ff3a;color:#0a0f5c}
+@keyframes sqMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes sqPulse{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+@keyframes sqSpin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="min-height:100vh;overflow:hidden">
+
+  <header style="position:sticky;top:0;z-index:10;background:rgba(10,15,92,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(143,150,214,.18)">
+    <div style="max-width:1280px;margin:0 auto;padding:16px clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <a href="#top" style="display:flex;align-items:baseline;font-family:'Unbounded',sans-serif;font-weight:900;font-size:24px;letter-spacing:-.04em;color:#f4ff3a;line-height:1"><span>s</span><span style="width:.74em;height:.61em;border-radius:50%;border:.1em solid #f4ff3a;box-sizing:border-box;margin:0 .025em;transform:translateY(.018em);position:relative;flex:none"><span style="position:absolute;inset:0;margin:auto;width:.26em;height:.26em;border-radius:50%;background:#f4ff3a"></span></span><span>niqus</span></a>
+      <nav style="display:flex;align-items:center;gap:clamp(14px,2.4vw,32px);flex-wrap:wrap;justify-content:flex-end">
+        <a href="#features" style="color:#eef0ff;font-weight:700;font-size:15px" style-hover="color:#f4ff3a">{{ t.navFeatures }}</a>
+        <a href="#visuals" style="color:#eef0ff;font-weight:700;font-size:15px" style-hover="color:#f4ff3a">{{ t.navVisuals }}</a>
+        <a href="#skins" style="color:#eef0ff;font-weight:700;font-size:15px" style-hover="color:#f4ff3a">{{ t.navSkins }}</a>
+        <div style="display:flex;border-radius:20px;box-shadow:inset 0 0 0 1.5px #eef0ff;padding:3px;gap:2px">
+          <sc-for list="{{ langs }}" as="l" hint-placeholder-count="2">
+            <div sc-camel-on-click="{{ l.on }}" style="padding:5px 11px;border-radius:16px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer;background:{{ l.bg }};color:{{ l.fg }}">{{ l.code }}</div>
+          </sc-for>
+        </div>
+        <a href="#download" style="background:#f4ff3a;color:#0a0f5c;font-weight:700;font-size:15px;padding:10px 18px;border-radius:24px;box-shadow:0 4px 0 #b9c400" style-hover="color:#0a0f5c;transform:translateY(-2px);box-shadow:0 6px 0 #b9c400">{{ t.navCta }}</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(48px,8vw,110px) clamp(20px,4vw,48px) clamp(40px,6vw,80px)">
+    <div style="position:absolute;right:-10%;top:-6%;width:min(70vw,860px);aspect-ratio:1;pointer-events:none">{{ ripples }}</div>
+    <div style="position:relative;display:flex;flex-direction:column;gap:clamp(20px,3vw,36px)">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span style="background:#ff5fa2;color:#0a0f5c;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.14em;padding:7px 12px;border-radius:20px;transform:rotate(-3deg)">{{ t.badge1 }}</span>
+        <span style="background:#3cf2c8;color:#0a0f5c;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.14em;padding:7px 12px;border-radius:20px;transform:rotate(2deg)">{{ t.badge2 }}</span>
+      </div>
+      <h1 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(56px,11.5vw,184px);line-height:.88;letter-spacing:-.055em;text-wrap:balance">
+        <span style="color:#f4ff3a">So good</span><br><span style="color:#eef0ff">to be </span><span style="color:#ff5fa2;font-style:italic">true.</span>
+      </h1>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,56px);align-items:flex-end;justify-content:space-between">
+        <p style="margin:0;max-width:560px;font-size:clamp(18px,1.8vw,24px);line-height:1.4;color:#c9cdff;text-wrap:pretty">{{ t.heroSub }}</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#download" style="background:#f4ff3a;color:#0a0f5c;font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;padding:18px 28px;border-radius:40px;box-shadow:0 6px 0 #b9c400" style-hover="color:#0a0f5c;transform:translateY(-3px);box-shadow:0 9px 0 #b9c400">{{ t.ctaDownload }}</a>
+          <a href="#features" style="color:#eef0ff;font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;padding:18px 28px;border-radius:40px;box-shadow:inset 0 0 0 2px #eef0ff" style-hover="color:#0a0f5c;background:#eef0ff">{{ t.ctaMore }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="background:#f4ff3a;color:#0a0f5c;transform:rotate(-2deg);margin:20px -20px;padding:16px 0;overflow:hidden;box-shadow:0 10px 0 #2b3bff">{{ marquee }}</div>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(20px,4vw,48px)">
+    <div style="position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/9;background:#3b7fe0;box-shadow:0 0 0 2px rgba(143,150,214,.25), 0 40px 80px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1f5fd1 0%,#3b86ea 38%,#8fc9ff 62%,#cfeaff 70%)"></div>
+      <div style="position:absolute;left:6%;top:9%;width:34%;height:16%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));filter:blur(6px)"></div>
+      <div style="position:absolute;left:24%;top:5%;width:22%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,0));filter:blur(5px)"></div>
+      <div style="position:absolute;right:4%;top:14%;width:30%;height:13%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.85),rgba(255,255,255,0));filter:blur(7px)"></div>
+      <div style="position:absolute;right:22%;top:24%;width:18%;height:8%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.7),rgba(255,255,255,0));filter:blur(5px)"></div>
+      <div style="position:absolute;left:-30%;right:20%;top:56%;height:110%;border-radius:50%;background:radial-gradient(120% 60% at 45% 8%,#9be05a 0%,#5fbf2e 22%,#3d9a1f 55%,#2a7a14 100%)"></div>
+      <div style="position:absolute;left:30%;right:-40%;top:62%;height:110%;border-radius:50%;background:radial-gradient(100% 55% at 40% 6%,#a8ea66 0%,#6cc93a 20%,#45a524 55%,#2f8318 100%);box-shadow:0 -6px 30px rgba(255,255,255,.18)"></div>
+      <div style="position:absolute;left:3%;top:5%;display:flex;flex-direction:column;gap:clamp(12px,2.2vw,26px)"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:clamp(56px,7%,84px)"><span style="width:clamp(28px,3.4vw,44px);aspect-ratio:5/4;border-radius:4px;background:linear-gradient(180deg,#fff27a,#f4d21a);box-shadow:0 2px 4px rgba(0,0,0,.3), inset 0 2px 0 rgba(255,255,255,.6);position:relative"><span style="position:absolute;left:0;top:-14%;width:42%;height:22%;border-radius:3px 3px 0 0;background:#f4d21a"></span></span><span style="font-size:clamp(9px,1vw,13px);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);text-align:center;line-height:1.15">{{ t.deskMusic }}</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:clamp(56px,7%,84px)"><span style="width:clamp(28px,3.4vw,44px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from 30deg,#dfe3ff,#ffd1ec,#c8fff1,#fff7b8,#dfe3ff);box-shadow:0 2px 4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center"><span style="width:26%;aspect-ratio:1;border-radius:50%;background:#3b7fe0;box-shadow:0 0 0 3px rgba(255,255,255,.7)"></span></span><span style="font-size:clamp(9px,1vw,13px);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);text-align:center;line-height:1.15">{{ t.deskMix }}</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:clamp(56px,7%,84px)"><span style="width:clamp(28px,3.4vw,44px);aspect-ratio:1;border-radius:22.5%;background:radial-gradient(120% 100% at 30% 0%, #1b2390, #0a0f5c 60%, #060a33);box-shadow:0 2px 4px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center"><span style="width:56%;aspect-ratio:1;border-radius:50%;border:3px solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:28%;aspect-ratio:1;border-radius:50%;background:#f4ff3a"></span></span></span><span style="font-size:clamp(9px,1vw,13px);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);text-align:center;line-height:1.15">soniqus</span></div></div>
+      <div style="position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:min(64%,705px);filter:drop-shadow(0 24px 30px rgba(10,30,80,.35))"><div style="width:100%;aspect-ratio:705/490;background-image:url(&quot;dc31b206-e47b-462f-a975-e7db4563ec9a&quot;);background-size:100% 100%"></div></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:clamp(28px,6.2%,42px);background:linear-gradient(180deg,#5a68ff 0%,#2b3bff 12%,#1f2bd8 60%,#1a24b8 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.45);display:flex;align-items:stretch">
+        <div style="display:flex;align-items:center;gap:8px;padding:0 clamp(12px,1.8vw,22px) 0 clamp(8px,1vw,12px);background:linear-gradient(180deg,#fbff8a 0%,#f4ff3a 45%,#c9d400 100%);border-radius:0 18px 18px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 2px 0 6px rgba(0,0,0,.3);color:#0a0f5c;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(10px,1.2vw,16px);letter-spacing:-.02em"><span style="width:1.2em;height:1.2em;border-radius:50%;border:.22em solid #0a0f5c;box-sizing:border-box"></span>{{ t.start }}</div>
+        <div style="display:flex;align-items:center;padding:4px clamp(6px,1vw,12px);gap:6px;flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;height:100%;padding:0 12px;border-radius:4px;background:rgba(10,15,92,.45);box-shadow:inset 0 1px 2px rgba(0,0,0,.4);color:#fff;font-size:clamp(9px,1vw,13px);font-weight:700;max-width:30%;white-space:nowrap;overflow:hidden"><span style="width:12px;height:12px;border-radius:50%;border:2.5px solid #f4ff3a;box-sizing:border-box;flex:none"></span>soniqus</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:0 clamp(10px,1.4vw,18px);background:linear-gradient(180deg,#3f8bff,#1d63e0);box-shadow:inset 1px 0 0 rgba(0,0,0,.25), inset 2px 0 0 rgba(255,255,255,.2);color:#fff;font-size:clamp(9px,1vw,13px);font-weight:700"><span style="width:10px;height:10px;border-radius:50%;background:#f4ff3a;box-shadow:0 0 6px #f4ff3a"></span>{{ clock }}</div>
+      </div>
+      <span style="position:absolute;top:22px;right:22px;z-index:2;background:#ff5fa2;color:#0a0f5c;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(14px,1.6vw,20px);padding:10px 16px;border-radius:30px;transform:rotate(-6deg)">{{ t.shotSticker }}</span>
+    </div>
+  </section>
+
+  <section id="features" style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(56px,8vw,110px);display:flex;flex-direction:column;gap:clamp(28px,4vw,48px)">
+    <h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(40px,7vw,104px);line-height:.92;letter-spacing:-.05em;text-wrap:balance">{{ t.featTitleA }} <span style="color:#3cf2c8">{{ t.featTitleB }}</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:18px">
+      <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+        <div style="background:{{ f.bg }};color:{{ f.fg }};border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:240px;transition:transform .2s" style-hover="transform:translateY(-6px) rotate(-1deg)">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:56px;line-height:1;letter-spacing:-.04em">{{ f.n }}</span>
+          <span style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:24px;line-height:1.1;letter-spacing:-.02em;margin-top:auto">{{ f.title }}</span>
+          <span style="font-size:16px;line-height:1.45;opacity:.85;text-wrap:pretty">{{ f.body }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="visuals" style="background:#f4ff3a;color:#0a0f5c">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:clamp(28px,4vw,48px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between">
+        <h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(40px,7vw,104px);line-height:.92;letter-spacing:-.05em;max-width:900px;text-wrap:balance">{{ t.visTitle }}</h2>
+        <p style="margin:0;max-width:380px;font-size:18px;line-height:1.45;font-weight:500">{{ t.visSub }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:28px 20px">
+        <sc-for list="{{ visuals }}" as="v" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);box-shadow:0 8px 0 #2b3bff">{{ v.canvas }}<div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(155deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.03) 30%, transparent 42%)"></div></div>
+            <div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px">{{ v.n }}</span><span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.03em">{{ v.name }}</span></div>
+            <span style="font-size:15px;line-height:1.4">{{ v.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="skins" style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:clamp(28px,4vw,48px)">
+    <h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(40px,7vw,104px);line-height:.92;letter-spacing:-.05em;text-wrap:balance">{{ t.skinTitleA }}<br><span style="color:#ff5fa2">{{ t.skinTitleB }}</span></h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,2.5vw,32px)">
+      <sc-for list="{{ skins }}" as="s" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="width:clamp(110px,13vw,160px);aspect-ratio:1;border-radius:50%;background:{{ s.body }};box-shadow:inset 0 2px 0 rgba(255,255,255,.35), inset 0 -4px 0 rgba(0,0,0,.25), 0 14px 30px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;transition:transform .25s" style-hover="transform:rotate(-12deg) scale(1.06)">
+            <span style="width:56%;aspect-ratio:1;border-radius:50%;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);box-shadow:0 0 0 4px rgba(0,0,0,.3), inset 0 6px 14px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center"><span style="width:38%;aspect-ratio:1;border-radius:50%;border:4px solid #f4ff3a;box-sizing:border-box"></span></span>
+          </div>
+          <span style="font-weight:700;font-size:16px">{{ s.name }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="download" style="padding:0 clamp(20px,4vw,48px) clamp(56px,8vw,110px)">
+    <div style="max-width:1280px;margin:0 auto;background:#ff5fa2;color:#0a0f5c;border-radius:40px;padding:clamp(40px,7vw,96px) clamp(24px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,3vw,32px);position:relative;overflow:hidden">
+      <div style="width:clamp(88px,10vw,128px);aspect-ratio:1;border-radius:22.5%;background:radial-gradient(120% 100% at 30% 0%, #1b2390, #0a0f5c 60%, #060a33);box-shadow:0 18px 30px rgba(10,15,92,.4);display:flex;align-items:center;justify-content:center"><span style="width:56%;aspect-ratio:1;border-radius:50%;border:clamp(8px,.9vw,11px) solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:30%;aspect-ratio:1;border-radius:50%;background:#f4ff3a"></span></span></div>
+      <h2 style="margin:0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(44px,8.5vw,128px);line-height:.88;letter-spacing:-.055em">So good<br>to be true.</h2>
+      <p style="margin:0;font-size:clamp(17px,1.6vw,21px);font-weight:500;max-width:520px">{{ t.dlSub }}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+        <sc-for list="{{ platforms }}" as="p" hint-placeholder-count="3">
+          <a href="#download" style="background:#0a0f5c;color:#f4ff3a;font-family:'Unbounded',sans-serif;font-weight:700;font-size:17px;padding:18px 26px;border-radius:40px;box-shadow:0 6px 0 #060a33;display:flex;flex-direction:column;align-items:center;gap:2px" style-hover="color:#f4ff3a;transform:translateY(-3px);box-shadow:0 9px 0 #060a33">{{ p.name }}<span style="font-family:'JetBrains Mono',monospace;font-weight:500;font-size:11px;letter-spacing:.1em;color:#c9cdff">{{ p.sub }}</span></a>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em">{{ t.dlNote }}</span>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid rgba(143,150,214,.18)">
+    <div style="max-width:1280px;margin:0 auto;padding:28px clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;font-size:14px;color:#8f96d6">
+      <span>© 2026 NUVOLACAT S.L.U. · {{ t.footer }}</span>
+      <a href="https://nuvola.cat" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;color:#8f96d6;line-height:1" style-hover="color:#eef0ff"><span>{{ t.madeBy }}</span><img src="https://nuvola.cat/assets/img/nuvola-logo.png" alt="nuvola" style="height:16px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.8;transform:translateY(0px)"></a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;es&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en'|'es'&quot;}}">
+const COPY = {
+  en: {
+    navFeatures: 'Features', navVisuals: 'Visuals', navSkins: 'Skins', navCta: 'Download',
+    badge1: 'FREE · NO ADS', badge2: 'FOR macOS',
+    heroSub: 'The music player your desktop has been missing since 1999. Real hardware vibes, visuals that dance to every beat, and zero subscriptions.',
+    ctaDownload: 'Get soniqus', ctaMore: 'See what it does',
+    marquee: ['20-BAND EQ', '4 LIVE VISUALS', 'ID3 TAG EDITOR', '6 SKINS', 'DRAG & DROP PLAYLISTS', 'MP3 · FLAC · OGG · WAV'],
+    shotLabel: '', deskMusic: 'My Music', deskMix: 'Mixtapes', start: 'start', shotSticker: 'it’s back!',
+    featTitleA: 'Everything you loved.', featTitleB: 'None of the clutter.',
+    features: [
+      ['Two modes, one soul', 'A compact twin-screen mini player and a full navigation console. Switch whenever you like.'],
+      ['20-band equalizer', 'Sculpt every frequency, plus amp, balance and pitch knobs that actually feel like knobs.'],
+      ['Tag it right', 'Read and edit ID3 tags, grab covers and missing info from the internet in one click.'],
+      ['Playlists, your way', 'Add, delete, reorder. Drag files straight in. Keyboard shortcuts for the pros.'],
+      ['Smooth as vinyl', 'Iris, CRT, vortex, glitch… pick the screen transition that matches your mood.'],
+      ['Your desk, your rules', 'Always on top, minimise to a tiny bar, lock it in place. Light as a feather.'],
+      ['Six skins', 'Light aluminium, brushed metal, smoke plastic… change the whole look in one tap.'],
+      ['Plays it all', 'MP3, FLAC, OGG, WAV, M4A and your old M3U playlists. No conversions, no fuss.'],
+    ],
+    visTitle: 'Your music, but you can see it.', visSub: 'Four real-time visualizers driven by the actual audio. Flip between them with the big arrows.',
+    visuals: [['Rings', 'Ripples that pulse out from the logo.'], ['3D VU', 'A frequency landscape with sparks, peaks and shockwaves.'], ['Halo', 'Glowing stereo waveforms with smoky trails.'], ['Flight', 'Fly through a tunnel made of your song.']],
+    vizPh: 'VISUAL SCREENSHOT',
+    skinTitleA: 'Dress it up.', skinTitleB: 'Six skins.',
+    dlSub: 'Free download. No account, no ads, no nonsense. Just press play.',
+    platforms: [['macOS', 'Intel + Apple Silicon']],
+    dlNote: 'v1.26.1116.1846 · 18 MB', footer: 'All rights reserved.', madeBy: 'Made by',
+  },
+  es: {
+    navFeatures: 'Funciones', navVisuals: 'Visuales', navSkins: 'Aspectos', navCta: 'Descargar',
+    badge1: 'GRATIS · SIN ANUNCIOS', badge2: 'PARA macOS',
+    heroSub: 'El reproductor que tu escritorio echa de menos desde 1999. Alma de hardware, visuales que bailan cada golpe y cero suscripciones.',
+    ctaDownload: 'Consigue soniqus', ctaMore: 'Mira lo que hace',
+    marquee: ['ECUALIZADOR 20 BANDAS', '4 VISUALES EN VIVO', 'EDITOR DE ETIQUETAS ID3', '6 ASPECTOS', 'LISTAS ARRASTRAR Y SOLTAR', 'MP3 · FLAC · OGG · WAV'],
+    shotLabel: '', deskMusic: 'Mi música', deskMix: 'Recopilatorios', start: 'inicio', shotSticker: '¡ha vuelto!',
+    featTitleA: 'Todo lo que te gustaba.', featTitleB: 'Nada de lo que sobra.',
+    features: [
+      ['Dos modos, una misma alma', 'Un mini reproductor compacto de doble pantalla y una consola de navegación completa. Cambia cuando quieras.'],
+      ['Ecualizador de 20 bandas', 'Esculpe cada frecuencia, con ruedas de ampli, balance y tono que se sienten de verdad.'],
+      ['Etiquetas perfectas', 'Lee y edita las etiquetas ID3 y trae carátulas y datos de internet con un clic.'],
+      ['Listas a tu manera', 'Añade, borra y ordena. Arrastra los archivos directamente. Atajos de teclado para los pros.'],
+      ['Suave como un vinilo', 'Iris, CRT, vórtice, glitch… elige la transición que va con tu humor.'],
+      ['Tu escritorio, tus reglas', 'Siempre encima, minimízalo a una barra, bloquéalo en su sitio. Ligero como una pluma.'],
+      ['Seis aspectos', 'Aluminio claro, metal cepillado, plástico humo… cambia todo el look con un toque.'],
+      ['Lo reproduce todo', 'MP3, FLAC, OGG, WAV, M4A y tus listas M3U de siempre. Sin conversiones, sin líos.'],
+    ],
+    visTitle: 'Tu música, pero la puedes ver.', visSub: 'Cuatro visualizadores en tiempo real que reaccionan al audio de verdad. Cámbialos con las flechas grandes.',
+    visuals: [['Ondas', 'Anillos que laten desde el logo.'], ['Vúmetro 3D', 'Un paisaje de frecuencias con chispas, picos y ondas expansivas.'], ['Halo', 'Ondas estéreo brillantes con estela de humo.'], ['Vuelo', 'Vuela por un túnel hecho de tu canción.']],
+    vizPh: 'CAPTURA DEL VISUAL',
+    skinTitleA: 'Vístelo.', skinTitleB: 'Seis aspectos.',
+    dlSub: 'Descarga gratis. Sin cuenta, sin anuncios, sin tonterías. Solo dale al play.',
+    platforms: [['macOS', 'Intel + Apple Silicon']],
+    dlNote: 'v1.26.1116.1846 · 18 MB', footer: 'Todos los derechos reservados.', madeBy: 'Hecho por',
+  },
+};
+const CARD = [['#2b3bff', '#eef0ff'], ['#f4ff3a', '#0a0f5c'], ['#3cf2c8', '#0a0f5c'], ['#ff5fa2', '#0a0f5c'], ['#3cf2c8', '#0a0f5c'], ['#ff5fa2', '#0a0f5c'], ['#2b3bff', '#eef0ff'], ['#f4ff3a', '#0a0f5c']];
+const SKINS = [
+  ['Aluminio claro', 'Light aluminium', "linear-gradient(118deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.55) 34%, rgba(255,255,255,0) 48%), radial-gradient(130% 90% at 25% 0%, #f1f2f6 0%, #d4d6de 50%, #a9acb8 100%)"],
+  ['Metal cepillado', 'Brushed metal', "repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, rgba(0,0,0,.05) 1px 2px, transparent 2px 5px), linear-gradient(118deg, rgba(255,255,255,0) 14%, rgba(235,237,245,.34) 30%, rgba(255,255,255,0) 44%), radial-gradient(130% 90% at 25% 0%, #8a8c92 0%, #55575d 40%, #2c2d31 100%)"],
+  ['Grafito mate', 'Matte graphite', "radial-gradient(140% 100% at 30% 0%, #3a3b41 0%, #26272c 45%, #18191c 100%)"],
+  ['Azul anodizado', 'Anodized blue', "linear-gradient(118deg, rgba(255,255,255,0) 14%, rgba(200,210,255,.32) 30%, rgba(255,255,255,0) 44%), radial-gradient(130% 90% at 25% 0%, #4452d0 0%, #1f2896 45%, #0b1152 100%)"],
+  ['Plástico humo', 'Smoke plastic', "linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.06) 22%, rgba(255,255,255,0) 40%), radial-gradient(120% 90% at 50% 110%, rgba(90,110,255,.45), transparent 60%), linear-gradient(160deg, #3a4090, #12153a)"],
+  ['Amarillo señal', 'Signal yellow', "linear-gradient(118deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.35) 34%, rgba(255,255,255,0) 48%), radial-gradient(130% 90% at 25% 0%, #f8ff86 0%, #e9f520 50%, #b9c400 100%)"],
+];
+class Component extends DCLogic {
+
+  state = { lang: null, prefs: { smoke: true, zoom: true, zoomSpeed: 0.5, fxLevel: 0.7, blur: false }, playing: true };
+  cv = {}; hist = []; sm = new Array(32).fill(0); frame = 0;
+  loop = () => {
+    this.raf = requestAnimationFrame(this.loop);
+    const d = this.data();
+    if (this.frame++ % 2 === 0) { this.hist.unshift(d.spec.slice()); if (this.hist.length > 24) this.hist.pop(); }
+    for (const k of [0, 1, 2, 3]) {
+      const c = this.cv[k]; if (!c || !c.isConnected) continue;
+      const r = c.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      const dpr = window.devicePixelRatio || 1, w = c.clientWidth, hh = c.clientHeight;
+      if (c.width !== Math.round(w * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(hh * dpr); }
+      const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (k === 0) this.drawOndas(ctx, w, hh, d); else if (k === 1) this.draw3d(ctx, w, hh); else if (k === 2) this.drawHalo(ctx, w, hh, d); else this.drawFly(ctx, w, hh);
+    }
+  };
+  drawOndas(ctx, w, h, d) {
+    const t = performance.now() / 1000, bass = (d.spec[0] + d.spec[1] + d.spec[2]) / 3;
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, R = Math.hypot(w, h) * 0.62, n = 9, dur = 5;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.6);
+    g.addColorStop(0, `rgba(43,59,255,${0.25 + bass * 0.3})`); g.addColorStop(1, 'rgba(43,59,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < n; i++) {
+      const p = ((t / dur) + i / n) % 1, r = p * R;
+      const a = p < 0.12 ? p / 0.12 : 1 - (p - 0.12) / 0.88;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = i % 3 === 2 ? `rgba(43,59,255,${a})` : `rgba(244,255,58,${a * 0.6})`;
+      ctx.lineWidth = 2 + bass * 3; ctx.stroke();
+    }
+    const s = Math.min(w, h) * (0.16 + bass * 0.03);
+    ctx.save(); ctx.translate(cx, cy);
+    ctx.shadowColor = '#f4ff3a'; ctx.shadowBlur = 20 + bass * 30;
+    ctx.beginPath(); ctx.arc(0, 0, s * 0.82, 0, Math.PI * 2); ctx.lineWidth = s * 0.3; ctx.strokeStyle = '#f4ff3a'; ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, s * 0.3, 0, Math.PI * 2); ctx.fillStyle = '#f4ff3a'; ctx.fill();
+    ctx.restore();
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  data() {
+    const N = 32, spec = new Array(N), L = new Array(128), Rr = new Array(128);
+    const real = this.anL && this.audio && !this.audio.paused;
+    if (real) {
+      const f = this.fbuf || (this.fbuf = new Uint8Array(this.anL.frequencyBinCount));
+      const f2 = this.fbuf2 || (this.fbuf2 = new Uint8Array(this.anR.frequencyBinCount));
+      this.anL.getByteFrequencyData(f); this.anR.getByteFrequencyData(f2);
+      const n = f.length;
+      for (let i = 0; i < N; i++) {
+        const a = Math.floor(Math.pow(n * 0.7, i / N)), b = Math.max(a + 1, Math.floor(Math.pow(n * 0.7, (i + 1) / N)));
+        let s = 0; for (let j = a; j < b; j++) s += f[j] + f2[j];
+        spec[i] = s / ((b - a) * 510);
+      }
+      const t1 = this.tbuf || (this.tbuf = new Uint8Array(this.anL.fftSize)), t2 = this.tbuf2 || (this.tbuf2 = new Uint8Array(this.anR.fftSize));
+      this.anL.getByteTimeDomainData(t1); this.anR.getByteTimeDomainData(t2);
+      const st = Math.floor(t1.length / 128);
+      for (let i = 0; i < 128; i++) { L[i] = (t1[i * st] - 128) / 128; Rr[i] = (t2[i * st] - 128) / 128; }
+    } else {
+      const on = this.state.playing ? 1 : 0, t = performance.now() / 1000;
+      const beat = Math.pow(Math.max(0, Math.sin(t * Math.PI * 2.1)), 10), hat = Math.pow(Math.max(0, Math.sin(t * Math.PI * 8.4 + 1)), 16);
+      for (let i = 0; i < N; i++) {
+        const x = i / N;
+        const v = (0.55 * (1 - x) + 0.15) * (0.55 + 0.45 * Math.sin(t * (1.3 + x * 3) + i * 1.7) * Math.sin(t * 0.7 + i)) + beat * 0.55 * Math.max(0, 1 - x * 3) + hat * 0.4 * Math.max(0, x - 0.55) + Math.random() * 0.08;
+        spec[i] = Math.max(0, Math.min(1, v)) * on;
+      }
+      const amp = (0.35 + beat * 0.5) * on;
+      for (let i = 0; i < 128; i++) {
+        const p = i / 128 * Math.PI * 2;
+        L[i] = amp * (0.5 * Math.sin(p * 3 + t * 9) + 0.3 * Math.sin(p * 11 - t * 13) + 0.2 * (Math.random() - 0.5));
+        Rr[i] = amp * (0.5 * Math.sin(p * 4 - t * 7) + 0.3 * Math.sin(p * 13 + t * 11) + 0.2 * (Math.random() - 0.5));
+      }
+    }
+    for (let i = 0; i < N; i++) { this.sm[i] = spec[i] > this.sm[i] ? spec[i] : this.sm[i] * 0.88 + spec[i] * 0.12; spec[i] = this.sm[i]; }
+    return { spec, L, R: Rr };
+  }
+  col(v, a) {
+    const r = Math.round(43 + (244 - 43) * v), g = Math.round(59 + (255 - 59) * v), b = Math.round(255 + (58 - 255) * v);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+  draw3d(ctx, w, h) {
+    const P = this.state.prefs, t = performance.now() / 1000;
+    const H = this.hist, n = H.length;
+    const cur = H[0] || new Array(32).fill(0);
+    const bass = (cur[0] + cur[1] + cur[2] + cur[3]) / 4, energy = cur.reduce((a, v) => a + v, 0) / 32;
+    this.kick = Math.max((this.kick || 0) * 0.9, bass > 0.62 && bass > (this.lastBass || 0) + 0.04 ? 1 : 0);
+    this.lastBass = bass;
+    const K = this.kick, fx = P.fxLevel;
+    // trails / background
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = P.smoke ? 'rgba(2,4,26,.38)' : 'rgba(2,4,26,.9)';
+    ctx.fillRect(0, 0, w, h);
+    // camera
+    const spin = P.zoom ? t * (0.08 + P.zoomSpeed * 0.35) : 0;
+    const a = Math.sin(spin) * 0.38, ca = Math.cos(a), sa = Math.sin(a);
+    const tilt = 0.9 + Math.sin(t * 0.23) * 0.15;
+    const shake = K * 3 * fx;
+    const ox = (Math.random() - 0.5) * shake, oy = (Math.random() - 0.5) * shake;
+    const hor = h * (0.2 + Math.sin(t * 0.17) * 0.02);
+    const zoom = 1 + K * 0.06 * fx;
+    const P3 = (x, z, y) => {
+      const xr = x * ca - (z - 0.5) * sa, zr = x * sa + (z - 0.5) * ca + 0.5, D = 2.5 + zr * 2.4;
+      return [w / 2 + ox + (xr * w * 1.1 / D) * zoom, hor + oy + (h * 0.95 * tilt / D - y * h * 0.75 / D) * zoom, D, zr];
+    };
+    // starfield
+    if (!this.stars) this.stars = Array.from({ length: 70 }, () => [Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random()]);
+    ctx.fillStyle = '#c9cdff';
+    for (const s of this.stars) {
+      s[2] -= 0.004 + energy * 0.03; if (s[2] <= 0.02) { s[0] = Math.random() * 2 - 1; s[1] = Math.random() * 2 - 1; s[2] = 1; }
+      const px = w / 2 + s[0] / s[2] * w * 0.25, py = hor * 0.7 + s[1] / s[2] * h * 0.2;
+      if (py > hor + 4) continue;
+      ctx.globalAlpha = (1 - s[2]) * 0.8; const r = (1 - s[2]) * 1.6; ctx.fillRect(px, py, r, r);
+    }
+    ctx.globalAlpha = 1;
+    // horizon sun glow pulsing with bass
+    const sg = ctx.createRadialGradient(w / 2, hor, 0, w / 2, hor, w * (0.3 + bass * 0.2));
+    sg.addColorStop(0, `rgba(244,255,58,${0.08 + bass * 0.18 * fx})`); sg.addColorStop(0.4, `rgba(43,59,255,${0.12 + energy * 0.2})`); sg.addColorStop(1, 'rgba(43,59,255,0)');
+    ctx.fillStyle = sg; ctx.fillRect(0, 0, w, h);
+    // scrolling floor grid (moves toward viewer)
+    const scroll = (t * (0.25 + energy * 0.8)) % (1 / 8);
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 12; i++) { const x = -1.2 + i * 0.2; const p1 = P3(x, 0, 0), p2 = P3(x, 1.4, 0); ctx.strokeStyle = 'rgba(80,96,255,.22)'; ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke(); }
+    for (let i = 0; i <= 11; i++) { const z = i / 8 - scroll; if (z < 0) continue; const p1 = P3(-1.2, z, 0), p2 = P3(1.2, z, 0); ctx.strokeStyle = `rgba(80,96,255,${0.12 + (1 - z / 1.4) * 0.3 + K * 0.3})`; ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke(); }
+    // spectrogram ribbons: filled terrain rows far→near
+    const rows = [];
+    for (let r = n - 1; r >= 0; r--) rows.push(r);
+    rows.sort((p, q) => P3(0, q / 23, 0)[3] - P3(0, p / 23, 0)[3]);
+    for (const r of rows) {
+      const z = r / 23, fade = 1 - r / 24, row = H[r];
+      ctx.beginPath();
+      const base0 = P3(-0.95, z, 0); ctx.moveTo(base0[0], base0[1]);
+      for (let i = 0; i < 32; i++) { const p = P3(-0.95 + (i / 31) * 1.9, z, row[i]); ctx.lineTo(p[0], p[1]); }
+      const base1 = P3(0.95, z, 0); ctx.lineTo(base1[0], base1[1]); ctx.closePath();
+      const g = ctx.createLinearGradient(0, base0[1] - h * 0.4, 0, base0[1]);
+      g.addColorStop(0, this.col(1, 0.07 * fade)); g.addColorStop(1, this.col(0, 0.015 * fade));
+      ctx.fillStyle = g; ctx.fill();
+      ctx.beginPath();
+      for (let i = 0; i < 32; i++) { const p = P3(-0.95 + (i / 31) * 1.9, z, row[i]); i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+      ctx.strokeStyle = this.col(0.15 + 0.85 * fade * fade, 0.12 + 0.55 * fade); ctx.lineWidth = r === 0 ? 2 : 1;
+      if (r === 0) { ctx.shadowColor = '#f4ff3a'; ctx.shadowBlur = 18 * fx; }
+      ctx.stroke(); ctx.shadowBlur = 0;
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    // front row bars with reflections + peaks
+    if (!this.peaks) this.peaks = new Array(32).fill(0);
+    for (let i = 0; i < 32; i++) {
+      const v = cur[i], x = -0.95 + (i / 31) * 1.9;
+      this.peaks[i] = Math.max(v, this.peaks[i] - 0.012);
+      const b0 = P3(x, 0, 0), b1 = P3(x, 0, v), pk = P3(x, 0, this.peaks[i]);
+      const bw = Math.max(2, w * 0.03 / b0[2]);
+      const gr = ctx.createLinearGradient(0, b0[1], 0, b1[1]);
+      gr.addColorStop(0, 'rgba(43,59,255,.55)'); gr.addColorStop(1, this.col(Math.min(1, v * 1.2), .85));
+      ctx.fillStyle = gr; ctx.shadowColor = this.col(v, 1); ctx.shadowBlur = 8 * fx;
+      ctx.fillRect(b0[0] - bw / 2, b1[1], bw, b0[1] - b1[1]);
+      ctx.shadowBlur = 0;
+      // reflection
+      const rg = ctx.createLinearGradient(0, b0[1], 0, b0[1] + (b0[1] - b1[1]) * 0.5);
+      rg.addColorStop(0, this.col(v, 0.28)); rg.addColorStop(1, this.col(v, 0));
+      ctx.fillStyle = rg; ctx.fillRect(b0[0] - bw / 2, b0[1] + 1, bw, (b0[1] - b1[1]) * 0.5);
+      // peak cap
+      ctx.fillStyle = '#ffffff'; ctx.shadowColor = '#f4ff3a'; ctx.shadowBlur = 8 * fx;
+      ctx.fillRect(b0[0] - bw / 2, pk[1] - 4, bw, 2); ctx.shadowBlur = 0;
+      // sparks on strong peaks
+      if (v > 0.8 && Math.random() < 0.25 * fx) (this.sparks || (this.sparks = [])).push({ x: b1[0], y: b1[1], vx: (Math.random() - 0.5) * 2.5, vy: -1.5 - Math.random() * 2.5, l: 1 });
+    }
+    // particles
+    if (this.sparks) {
+      for (const s of this.sparks) { s.x += s.vx; s.y += s.vy; s.vy += 0.08; s.l -= 0.025; ctx.fillStyle = this.col(1, Math.max(0, s.l)); ctx.fillRect(s.x, s.y, 2, 2); }
+      this.sparks = this.sparks.filter(s => s.l > 0).slice(-160);
+    }
+    // kick shockwave ring on the floor
+    if (K > 0.95) (this.waves || (this.waves = [])).push(0);
+    if (this.waves) {
+      ctx.lineWidth = 2;
+      for (let k = 0; k < this.waves.length; k++) {
+        const r = (this.waves[k] += 0.025);
+        ctx.beginPath();
+        for (let j = 0; j <= 40; j++) { const an = (j / 40) * Math.PI * 2; const p = P3(Math.cos(an) * r * 1.4, 0.5 + Math.sin(an) * r * 0.7, 0); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+        ctx.strokeStyle = `rgba(244,255,58,${Math.max(0, 0.5 - r * 0.5) * fx})`; ctx.stroke();
+      }
+      this.waves = this.waves.filter(r => r < 1);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // scanlines + vignette + flash
+    ctx.fillStyle = 'rgba(0,0,0,.18)';
+    for (let y = 0; y < h; y += 3) ctx.fillRect(0, y, w, 1);
+    const vg = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.3, w / 2, h / 2, Math.max(w, h) * 0.75);
+    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.6)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, w, h);
+    if (K > 0.5) { ctx.fillStyle = `rgba(244,255,58,${(K - 0.5) * 0.12 * fx})`; ctx.fillRect(0, 0, w, h); }
+  }
+  drawFly(ctx, w, h) {
+    const P = this.state.prefs, t = performance.now() / 1000, fx = P.fxLevel;
+    const H = this.hist, N = H.length; if (!N) return;
+    const cur = H[0], bass = (cur[0] + cur[1] + cur[2]) / 3, energy = cur.reduce((a, v) => a + v, 0) / 32;
+    this.fk = Math.max((this.fk || 0) * 0.9, bass > 0.6 && bass > (this.fLast || 0) + 0.04 ? 1 : 0); this.fLast = bass;
+    const K = this.fk;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = P.smoke ? 'rgba(2,4,26,.45)' : 'rgba(2,4,26,.92)'; ctx.fillRect(0, 0, w, h);
+    const cx = w / 2 + Math.sin(t * 0.5) * w * 0.04, cy = h / 2 + Math.sin(t * 0.37) * h * 0.05;
+    const roll = P.zoom ? Math.sin(t * (0.15 + P.zoomSpeed * 0.5)) * 0.22 : 0;
+    const f = Math.min(w, h) * (0.9 + K * 0.08 * fx);
+    const phase = (this.frame % 2) / 2;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(roll);
+    const pr = (X, Y, z) => [X * f / z, Y * f / z];
+    // core glow at vanishing point
+    const cg = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.min(w, h) * (0.25 + bass * 0.2));
+    cg.addColorStop(0, `rgba(255,255,255,${0.35 + K * 0.4})`); cg.addColorStop(0.15, `rgba(244,255,58,${0.25 + bass * 0.3 * fx})`); cg.addColorStop(1, 'rgba(43,59,255,0)');
+    ctx.fillStyle = cg; ctx.fillRect(-w, -h, w * 2, h * 2);
+    // warp streaks
+    if (!this.warp) this.warp = Array.from({ length: 110 }, () => ({ x: (Math.random() - 0.5) * 6, y: (Math.random() - 0.5) * 3, z: Math.random() * 24 + 1 }));
+    const sp = 0.18 + energy * 0.9 + K * 0.6;
+    ctx.lineCap = 'round';
+    for (const s of this.warp) {
+      const z0 = s.z; s.z -= sp; if (s.z < 0.4) { s.x = (Math.random() - 0.5) * 6; s.y = (Math.random() - 0.5) * 3; s.z = 24; continue; }
+      const a = pr(s.x, s.y, z0), b = pr(s.x, s.y, s.z);
+      ctx.strokeStyle = `rgba(201,205,255,${Math.min(1, (1 - s.z / 24) * 0.9)})`; ctx.lineWidth = Math.max(0.5, 2.2 / s.z * 2);
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    }
+    // tunnel rows: newest far, older approach the camera
+    const XS = 2.4, band = X => { const k = Math.min(31, Math.floor(Math.abs(X) / XS * 32)); return k; };
+    for (let r = 0; r < N; r++) {
+      const z = (N - r) - phase + 0.6; if (z < 0.6) continue;
+      const row = H[r], near = 1 - z / (N + 1), al = Math.max(0, near) * 0.9 + 0.05;
+      const pts = [];
+      for (let j = 0; j <= 40; j++) { const X = -XS + (j / 40) * XS * 2; pts.push([X, row[31 - band(X)]]); }
+      for (const sgn of [1, -1]) {
+        ctx.beginPath();
+        pts.forEach(([X, v], j) => { const p = pr(X, sgn * (1.1 - v * 0.85), z); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); });
+        const e1 = pr(XS, sgn * 1.1, z), e0 = pr(-XS, sgn * 1.1, z);
+        ctx.lineTo(e1[0], e1[1]); ctx.lineTo(e0[0], e0[1]); ctx.closePath();
+        ctx.fillStyle = sgn > 0 ? this.col(0.9, al * 0.12) : `rgba(43,59,255,${al * 0.14})`; ctx.fill();
+        ctx.beginPath();
+        pts.forEach(([X, v], j) => { const p = pr(X, sgn * (1.1 - v * 0.85), z); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); });
+        ctx.strokeStyle = sgn > 0 ? this.col(0.4 + 0.6 * near, al) : `rgba(110,130,255,${al})`;
+        ctx.lineWidth = Math.max(0.6, 2.4 / z * 1.5);
+        if (z < 3) { ctx.shadowColor = sgn > 0 ? '#f4ff3a' : '#6e82ff'; ctx.shadowBlur = 14 * fx; }
+        ctx.stroke(); ctx.shadowBlur = 0;
+      }
+      // side rails
+      if (r % 3 === 0) {
+        ctx.strokeStyle = `rgba(80,96,255,${al * 0.5})`; ctx.lineWidth = 1;
+        for (const sx of [-XS, XS]) { const a = pr(sx, -1.1, z), b = pr(sx, 1.1, z); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+      }
+    }
+    // beat gates flying past
+    if (K > 0.95) (this.gates || (this.gates = [])).push(24);
+    if (this.gates) {
+      for (let i = 0; i < this.gates.length; i++) {
+        const z = (this.gates[i] -= sp * 1.4); if (z < 0.5) continue;
+        const a = pr(-XS, -1.1, z), b = pr(XS, 1.1, z), al = Math.min(1, (1 - z / 24) * 1.3);
+        ctx.strokeStyle = `rgba(244,255,58,${al})`; ctx.lineWidth = Math.max(1, 6 / z);
+        ctx.shadowColor = '#f4ff3a'; ctx.shadowBlur = 20 * fx;
+        const rr = Math.min(Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1])) * 0.18;
+        ctx.beginPath(); ctx.roundRect ? ctx.roundRect(a[0], a[1], b[0] - a[0], b[1] - a[1], rr) : ctx.rect(a[0], a[1], b[0] - a[0], b[1] - a[1]); ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+      this.gates = this.gates.filter(z => z > 0.5);
+    }
+    ctx.restore();
+    // speed vignette, chromatic flash, scanlines
+    const vg = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.2, w / 2, h / 2, Math.max(w, h) * 0.7);
+    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, `rgba(0,0,0,${0.55 + energy * 0.25})`);
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, w, h);
+    if (K > 0.6) { ctx.fillStyle = `rgba(244,255,58,${(K - 0.6) * 0.15 * fx})`; ctx.fillRect(0, 0, w, h); }
+    ctx.fillStyle = 'rgba(0,0,0,.16)'; for (let y = 0; y < h; y += 3) ctx.fillRect(0, y, w, 1);
+  }
+  drawHalo(ctx, w, h, d) {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = this.state.prefs.smoke ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.3)'; ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    const line = (arr, y0, col, amp) => {
+      for (const [lw, al, bl, dy] of [[7, 0.10, 0, 0], [3, 0.35, 16, 3], [1.6, 1, 8, 0]]) {
+        ctx.beginPath();
+        for (let i = 0; i < arr.length; i++) { const x = w * 0.06 + (i / (arr.length - 1)) * w * 0.88; const y = y0 + dy + arr[i] * amp; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.strokeStyle = col.replace('A', al); ctx.lineWidth = lw; ctx.shadowColor = col.replace('A', 1); ctx.shadowBlur = bl; ctx.lineJoin = 'round'; ctx.stroke();
+      }
+    };
+    line(d.L, h * 0.38, 'rgba(110,130,255,A)', h * 0.26);
+    line(d.R, h * 0.64, 'rgba(244,255,58,A)', h * 0.26);
+    ctx.shadowBlur = 0; ctx.globalCompositeOperation = 'source-over';
+  }
+
+  componentDidMount() {
+    this.raf = requestAnimationFrame(this.loop);
+    if (this.state.lang) return;
+    const saved = (() => { try { return localStorage.getItem('soniqus-lang'); } catch (e) { return null; } })();
+    const nav = (navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
+    this.setState({ lang: saved || this.props.lang || nav });
+  }
+  setLang(l) { try { localStorage.setItem('soniqus-lang', l); } catch (e) {} this.setState({ lang: l }); document.documentElement.lang = l; }
+  renderVals() {
+    const lang = this.state.lang || this.props.lang || 'en';
+    const t = COPY[lang], h = React.createElement;
+    const items = [...t.marquee, ...t.marquee];
+    const marquee = h('div', { key: 'mq-' + lang, style: { display: 'flex', width: 'max-content', animation: 'sqMarq 28s linear infinite' } },
+      items.map((s, i) => h('span', { key: i, style: { display: 'flex', alignItems: 'center', gap: 28, paddingRight: 28, fontFamily: "'Unbounded',sans-serif", fontWeight: 900, fontSize: 'clamp(20px,2.6vw,34px)', letterSpacing: '-.02em', whiteSpace: 'nowrap' } },
+        s, h('span', { style: { width: 18, height: 18, borderRadius: '50%', border: '4px solid #0a0f5c', boxSizing: 'border-box', flex: 'none' } }))));
+    const ripples = h('div', { style: { position: 'absolute', inset: 0 } }, [0, 1, 2, 3, 4, 5].map(i => h('span', { key: i, style: {
+      position: 'absolute', left: '50%', top: '50%', width: '100%', height: '100%', borderRadius: '50%',
+      border: `2px solid ${['#f4ff3a', '#2b3bff', '#ff5fa2', '#3cf2c8', '#2b3bff', '#f4ff3a'][i]}`, opacity: 0,
+      animation: `sqPulse 7.2s cubic-bezier(.2,.6,.3,1) ${-i * 1.2}s infinite` } })));
+    return {
+      t, marquee, ripples, clock: (() => { const d = new Date(); return lang === 'es' ? d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) : d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); })(),
+      langs: ['en', 'es'].map(c => ({ code: c.toUpperCase(), on: () => this.setLang(c), bg: c === lang ? '#eef0ff' : 'transparent', fg: c === lang ? '#0a0f5c' : '#eef0ff' })),
+      features: t.features.map(([title, body], i) => ({ n: String(i + 1).padStart(2, '0'), title, body, bg: CARD[i][0], fg: CARD[i][1] })),
+      visuals: t.visuals.map(([name, body], i) => ({ n: String(i + 1).padStart(2, '0'), name, body, canvas: h('canvas', { key: 'viz' + i, ref: el => { this.cv[i] = el; }, style: { position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' } }) })),
+      skins: SKINS.map(([es, en, body]) => ({ name: lang === 'es' ? es : en, body })),
+      platforms: t.platforms.map(([name, sub]) => ({ name, sub })),
+    };
+  }
+}
+</script>
+
+
+</body></html>

@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  background: transparent;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #141416;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Margen transparente alrededor de la carcasa para que quepa su sombra. */
+#root { padding: 50px 80px 110px 80px; width: max-content; }
+input { user-select: text; -webkit-user-select: text; cursor: text; }
+img { -webkit-user-drag: none; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(143, 150, 214, .35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(244, 255, 58, .6); }
