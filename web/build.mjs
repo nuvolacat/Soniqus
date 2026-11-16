@@ -69,7 +69,7 @@ function page(lang) {
   // botón de plataforma: descarga real del DMG
   sub(`<a href="#download" style="background:#0a0f5c;color:#f4ff3a;`, `<a href="${DL}" download style="background:#0a0f5c;color:#f4ff3a;`);
   // recursos locales y pie legal
-  sub('url(&quot;dc31b206-e47b-462f-a975-e7db4563ec9a&quot;)', 'url(&quot;/assets/soniqus-app.png&quot;)');
+  sub('url(&quot;dc31b206-e47b-462f-a975-e7db4563ec9a&quot;)', `url(&quot;/assets/soniqus-app.png?v=${VERSION}&quot;)`);
   sub('https://nuvola.cat/assets/img/nuvola-logo.png', '/assets/nuvola-logo.png');
   sub('<span>© 2026 NUVOLACAT S.L.U. · {{ t.footer }}</span>', '<a href="https://github.com/nuvolacat/Soniqus" target="_blank" rel="noopener" style="color:#8f96d6;font-family:\'JetBrains Mono\',monospace;font-size:13px;letter-spacing:.04em" style-hover="color:#eef0ff">github.com/nuvolacat/Soniqus</a>');
   // overflow:hidden en el contenedor anulaba la cabecera fija (position:sticky); clip recorta igual sin romperla
@@ -92,7 +92,7 @@ function page(lang) {
 <meta property="og:title" content="soniqus — So good to be true.">
 <meta property="og:description" content="${desc}">
 <meta property="og:url" content="${SITE}${url(lang)}">
-<meta property="og:image" content="${SITE}/assets/og.png?v=3">
+<meta property="og:image" content="${SITE}/assets/og.png?v=${VERSION}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="${lang === 'es' ? 'es_ES' : 'en_US'}">
