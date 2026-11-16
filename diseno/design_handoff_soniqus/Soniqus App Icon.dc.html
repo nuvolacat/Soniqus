@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e9e8e4;font-family:'Space Grotesk',sans-serif;color:#141416}a{color:#2b3bff}a:hover{color:#141416}</style>
+</helmet>
+<section style="padding:64px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6b6a66">Ronda 5 · Icono de app soniqus · basado en logo 3g</div>
+    <div style="font-size:32px;font-weight:700">Ocho opciones de icono</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:28px">
+
+    <div id="5a" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5a</span><span style="font-weight:700">Anillo</span><span style="color:#6b6a66;font-size:14px">— la “o” del logo, sola</span><span style="background:#f4ff3a;color:#0a0f5c;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;padding:3px 8px;border-radius:10px">ELEGIDO</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #1b2390, #0a0f5c 60%, #060a33);box-shadow:inset 0 .01em 0 rgba(255,255,255,.25), 0 .06em .14em rgba(10,15,92,.35);display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="width:.56em;height:.56em;border-radius:50%;border:.085em solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:.17em;height:.17em;border-radius:50%;background:#f4ff3a"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5b" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5b</span><span style="font-weight:700">Ondas</span><span style="color:#6b6a66;font-size:14px">— anillo emitiendo ondas, como 3g</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:#0a0f5c;box-shadow:0 .06em .14em rgba(10,15,92,.35);position:relative;overflow:hidden;flex:none">
+            <span style="position:absolute;left:50%;top:50%;width:1.3em;height:1.3em;margin:-.65em 0 0 -.65em;border-radius:50%;border:.02em solid rgba(201,205,255,.22)"></span>
+            <span style="position:absolute;left:50%;top:50%;width:1em;height:1em;margin:-.5em 0 0 -.5em;border-radius:50%;border:.025em solid rgba(201,205,255,.32)"></span>
+            <span style="position:absolute;left:50%;top:50%;width:.74em;height:.74em;margin:-.37em 0 0 -.37em;border-radius:50%;border:.03em solid rgba(43,59,255,.9)"></span>
+            <span style="position:absolute;left:50%;top:50%;width:.48em;height:.48em;margin:-.24em 0 0 -.24em;border-radius:50%;border:.075em solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:.14em;height:.14em;border-radius:50%;background:#f4ff3a"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5c" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5c</span><span style="font-weight:700">Señal</span><span style="color:#6b6a66;font-size:14px">— invertido, destaca en cualquier dock</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #fbff9a, #f4ff3a 50%, #d6e200);box-shadow:inset 0 .01em 0 rgba(255,255,255,.6), 0 .06em .14em rgba(80,80,0,.3);display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="width:.56em;height:.56em;border-radius:50%;border:.085em solid #0a0f5c;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:.17em;height:.17em;border-radius:50%;background:#2b3bff"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5d" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5d</span><span style="font-weight:700">Monograma</span><span style="color:#6b6a66;font-size:14px">— “so” con la o-anillo</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #1b2390, #0a0f5c 60%, #060a33);box-shadow:0 .06em .14em rgba(10,15,92,.35);display:flex;align-items:center;justify-content:center;flex:none">
+            <div style="display:flex;align-items:baseline;font-family:'Unbounded',sans-serif;font-weight:900;font-size:.46em;letter-spacing:-.04em;color:#f4ff3a;line-height:1;transform:translateY(-.04em)"><span>s</span><span style="width:.74em;height:.61em;border-radius:50%;border:.1em solid #f4ff3a;box-sizing:border-box;margin-left:.03em;transform:translateY(.018em);position:relative;flex:none"><span style="position:absolute;inset:0;margin:auto;width:.26em;height:.26em;border-radius:50%;background:#f4ff3a"></span></span></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5e" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5e</span><span style="font-weight:700">Hardware</span><span style="color:#6b6a66;font-size:14px">— aluminio + pantalla, como el reproductor</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:linear-gradient(118deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.55) 34%, rgba(255,255,255,0) 48%), radial-gradient(130% 90% at 25% 0%, #f1f2f6 0%, #d4d6de 50%, #a9acb8 100%);box-shadow:inset 0 .01em 0 rgba(255,255,255,.8), inset 0 -.02em 0 rgba(0,0,0,.15), 0 .06em .14em rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="width:.72em;height:.72em;border-radius:50%;background:radial-gradient(120% 120% at 50% 35%, #0e1566 0%, #060a33 55%, #02041a 100%);box-shadow:0 0 0 .025em #8f92a0, 0 .01em 0 .03em rgba(255,255,255,.7), inset 0 .04em .08em rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center"><span style="width:.36em;height:.36em;border-radius:50%;border:.055em solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><span style="width:.11em;height:.11em;border-radius:50%;background:#f4ff3a"></span></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5f" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5f</span><span style="font-weight:700">Silueta</span><span style="color:#6b6a66;font-size:14px">— los dos círculos del modo compacto</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #fbff9a, #f4ff3a 50%, #d6e200);box-shadow:0 .06em .14em rgba(80,80,0,.3);position:relative;flex:none">
+            <span style="position:absolute;left:.29em;top:.1em;width:.42em;height:.42em;border-radius:50%;background:#0a0f5c;display:flex;align-items:center;justify-content:center"><span style="width:.2em;height:.2em;border-radius:50%;border:.035em solid #f4ff3a;box-sizing:border-box"></span></span>
+            <span style="position:absolute;left:.29em;top:.48em;width:.42em;height:.42em;border-radius:50%;background:#0a0f5c;display:flex;align-items:center;justify-content:center"><span style="width:.08em;height:.08em;border-radius:50%;background:#f4ff3a"></span></span>
+            <span style="position:absolute;left:.25em;top:.43em;width:.5em;height:.14em;border-radius:.07em;background:#0a0f5c"></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5g" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5g</span><span style="font-weight:700">Disco</span><span style="color:#6b6a66;font-size:14px">— anillo como vinilo sobre azul eléctrico</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #5563ff, #2b3bff 55%, #1a26c4);box-shadow:inset 0 .01em 0 rgba(255,255,255,.35), 0 .06em .14em rgba(43,59,255,.35);display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="width:.7em;height:.7em;border-radius:50%;background:repeating-radial-gradient(circle, #0a0f5c 0 .012em, #111873 .012em .03em);box-shadow:0 .02em .06em rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center"><span style="width:.26em;height:.26em;border-radius:50%;background:#f4ff3a;display:flex;align-items:center;justify-content:center"><span style="width:.06em;height:.06em;border-radius:50%;background:#0a0f5c"></span></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="5h" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><span style="background:#141416;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;border-radius:4px">5h</span><span style="font-weight:700">Vúmetro</span><span style="color:#6b6a66;font-size:14px">— barras de ecualizador dentro del anillo</span></div>
+      <div style="background:#f7f6f2;border-radius:10px;padding:28px;display:flex;align-items:flex-end;gap:24px">
+        <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4">
+          <div style="font-size:{{ z.fs }}px;width:1em;height:1em;border-radius:.225em;background:radial-gradient(120% 100% at 30% 0%, #1b2390, #0a0f5c 60%, #060a33);box-shadow:0 .06em .14em rgba(10,15,92,.35);display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="width:.62em;height:.62em;border-radius:50%;border:.06em solid #f4ff3a;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:.03em"><span style="width:.045em;height:.12em;border-radius:.02em;background:#2b3bff"></span><span style="width:.045em;height:.24em;border-radius:.02em;background:#f4ff3a"></span><span style="width:.045em;height:.3em;border-radius:.02em;background:#f4ff3a"></span><span style="width:.045em;height:.18em;border-radius:.02em;background:#f4ff3a"></span><span style="width:.045em;height:.1em;border-radius:.02em;background:#2b3bff"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return { sizes: [160, 64, 40, 24].map(fs => ({ fs })) };
+  }
+}
+</script>
+</body>
+</html>

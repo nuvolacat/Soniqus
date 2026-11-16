@@ -1,0 +1,14 @@
+node_modules/
+app/
+build/
+release/
+capturas/
+web/dist/
+web/deploy.env
+web/og-opciones/
+web-diseno/soniqus-web/
+web-diseno/unpacked/*.js
+diseno/design_handoff_soniqus/support.js
+src/renderer/views.gen.jsx
+src/renderer/views.gen.css
+.DS_Store
